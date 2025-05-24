@@ -56,14 +56,15 @@ Clarity and structure of the written report
 
 ## 🔧 Project Structure Overview
 
-benchmark_suite/src
+benchmark_suite/
+└── src/
 ├── benchmarks/
-│ ├── microbenchmarks.py
-│ ├── ml_workloads.py
-│ └── sql_benchmarks.py
+│ ├── microbenchmarks.py 📏 CPU & memory micro-tests
+│ ├── ml_workloads.py 🤖 Machine learning tasks
+│ └── sql_benchmarks.py 🗃️ SQL performance benchmarks
 ├── utils/
-│ ├── metrics.py
-│ └── profiler.py
-├── run_all.py
-├── requirements.txt
-└── report_template.md
+│ ├── metrics.py 🧠 System metrics collector
+│ └── profiler.py 🔍 Profiler for timing & usage
+├── run_all.py 🚀 Unified script to execute all benchmarks
+├── requirements.txt 📦 Dependencies list
+└── report_template.md 📝 Reporting template
