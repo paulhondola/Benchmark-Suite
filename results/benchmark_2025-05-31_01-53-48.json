@@ -1,0 +1,145 @@
+{
+  "timestamp": "2025-05-31T01:53:47.115014",
+  "config": {
+    "microbenchmarks": {
+      "matrix_size": 1000,
+      "vector_size": 100000000
+    },
+    "ml_workloads": {
+      "batch_size": 32,
+      "iterations": 10
+    },
+    "sql_benchmarks": {
+      "row_count": 100000,
+      "threshold": 50000
+    }
+  },
+  "system": {
+    "cpu_percent": 1.4,
+    "mem_percent": 74.6,
+    "platform": "Windows",
+    "cpu_count": 12,
+    "gpu_available": false,
+    "gpu_name": "AMD Radeon(TM) 660M",
+    "gpu_type": "Integrated AMD"
+  },
+  "run_id": "2025-05-31_01-53-48",
+  "Floating Point Throughput": {
+    "execution_time_sec": 0.0184,
+    "memory_usage_MB": 5.73
+  },
+  "Scalar FP Add Latency": {
+    "execution_time_sec": 2.4969,
+    "memory_usage_MB": 0.0
+  },
+  "Memory Bandwidth (read+compute)": {
+    "execution_time_sec": 0.9273,
+    "memory_usage_MB": 0.0
+  },
+  "Memory Read Throughput": {
+    "execution_time_sec": 10.9681,
+    "memory_usage_MB": 0.0
+  },
+  "Memory Latency (strided)": {
+    "execution_time_sec": 0.109,
+    "memory_usage_MB": 0.0
+  },
+  "Pointer Chasing Latency (random access)": {
+    "execution_time_sec": 0.5418,
+    "memory_usage_MB": 1.34
+  },
+  "Cache Performance": {
+    "results": [
+      [
+        4,
+        1.6e-05
+      ],
+      [
+        64,
+        8e-05
+      ],
+      [
+        512,
+        0.000638
+      ],
+      [
+        2048,
+        0.002999
+      ],
+      [
+        8192,
+        0.011508
+      ]
+    ]
+  },
+  "Thread Scalability": {
+    "cpu_count": 12,
+    "results": [
+      [
+        1,
+        7.1983
+      ],
+      [
+        2,
+        5.3973
+      ],
+      [
+        3,
+        4.7446
+      ],
+      [
+        4,
+        4.4275
+      ],
+      [
+        5,
+        4.3694
+      ],
+      [
+        6,
+        4.6261
+      ],
+      [
+        7,
+        4.926
+      ],
+      [
+        8,
+        5.293
+      ]
+    ]
+  },
+  "Sorting Benchmarks": {
+    "numpy_sort": {
+      "execution_time_sec": 0.1261
+    },
+    "pandas_sort": {
+      "execution_time_sec": 0.0658
+    }
+  },
+  "Join Benchmarks": {
+    "pandas_inner_join": {
+      "execution_time_sec": 0.1242
+    }
+  },
+  "ML Benchmark (scikit-learn)": {
+    "train_time_sec": 0.0216,
+    "inference_time_sec": 0.0012
+  },
+  "ML Benchmark (sklearn vs PyTorch)": {
+    "scikit_learn": {
+      "train_time_sec": 0.0221,
+      "inference_time_sec": 0.0009
+    },
+    "pytorch_cpu": {
+      "device": "cpu",
+      "train_time_sec": 0.8418,
+      "inference_time_sec": 0.0021
+    },
+    "pytorch_gpu": {
+      "device": "cpu",
+      "train_time_sec": 0.8829,
+      "inference_time_sec": 0.0021
+    }
+  }
+}
