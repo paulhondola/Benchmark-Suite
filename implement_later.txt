@@ -1,0 +1,13 @@
+Minor Suggestions (for future tuning, not urgent):
+
+    FP throughput is matrix-matrix mult — excellent for CPU/GPU stress, but later consider adding scalar loops for lower-level CPU metrics (e.g., floating-point add latency).
+
+    Memory bandwidth currently tests read+compute. To isolate read throughput, you might try:
+
+b = a.copy()
+
+Latency benchmark is sound. In the future, you might want to randomize access order to simulate true pointer chasing.
+
+Cache effectiveness is beautifully done. You’re probing L1/L2/L3 edges exactly where you should.
+
+Thread scaling now correctly distributes fixed work — you’ll finally get proper down-scaling of execution time with threads, limited only by CPU physical/logical core count and system load.

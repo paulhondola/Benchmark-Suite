@@ -1,13 +1,13 @@
 import sqlite3
 import time
 
-def simple_query():
+def simple_query(row_count=100000, threshold=50000):
     conn = sqlite3.connect(':memory:')
     c = conn.cursor()
     c.execute("CREATE TABLE test (id INTEGER, val TEXT)")
-    c.executemany("INSERT INTO test VALUES (?, ?)", [(i, str(i)) for i in range(100000)])
+    c.executemany("INSERT INTO test VALUES (?, ?)", [(i, str(i)) for i in range(row_count)])
     start = time.perf_counter()
-    c.execute("SELECT COUNT(*) FROM test WHERE id < 50000")
+    c.execute("SELECT COUNT(*) FROM test WHERE id < ?", (threshold,))
     c.fetchone()
     end = time.perf_counter()
     conn.close()

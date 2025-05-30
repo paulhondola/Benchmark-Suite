@@ -1,0 +1,11 @@
+microbenchmarks:
+  matrix_size: 1000
+  vector_size: 100000000
+
+ml_workloads:
+  batch_size: 32
+  iterations: 10
+
+sql_benchmarks:
+  row_count: 100000
+  threshold: 50000

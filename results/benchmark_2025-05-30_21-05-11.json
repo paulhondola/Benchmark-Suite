@@ -1,0 +1,40 @@
+{
+  "timestamp": "2025-05-30T21:04:59.548855",
+  "config": {
+    "microbenchmarks": {
+      "matrix_size": 1000,
+      "vector_size": 100000000
+    },
+    "ml_workloads": {
+      "batch_size": 32,
+      "iterations": 10
+    },
+    "sql_benchmarks": {
+      "row_count": 100000,
+      "threshold": 50000
+    }
+  },
+  "Floating Point Throughput": {
+    "execution_time_sec": 0.0564,
+    "memory_usage_MB": 7.52
+  },
+  "Memory Bandwidth": {
+    "execution_time_sec": 1.482,
+    "memory_usage_MB": 0.01
+  },
+  "CNN Inference": {
+    "execution_time_sec": 8.8694,
+    "memory_usage_MB": 355.86
+  },
+  "SQL Query": {
+    "execution_time_sec": 0.1653,
+    "memory_usage_MB": 6.13
+  },
+  "System Snapshot": {
+    "cpu_percent": 9.8,
+    "mem_percent": 78.3,
+    "platform": "Windows",
+    "cpu_count": 12,
+    "gpu_available": false
+  }
+}
