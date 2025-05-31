@@ -24,7 +24,6 @@ def print_cpu_info():
     print(f"Logical CPUs : {logical}")
     print(f"Physical Cores: {physical}")
 
-    # 1.4 CPU frequency (may be None on some macOS installs)
     freq = psutil.cpu_freq()
     if freq:
         print(f"CPU Frequency: {freq.current:.1f} MHz")
@@ -36,6 +35,29 @@ def print_cpu_info():
     print(f"Total RAM: {mem.total / (1024**3):.2f} GiB")
     print(f"Used RAM : {mem.used / (1024**3):.2f} GiB ({mem.percent:.1f}%)")
     print(f"Free RAM : {mem.available / (1024**3):.2f} GiB ({100 - mem.percent:.1f}%)")
+
+
+import time
+import multiprocessing
+
+def stress_worker(duration_sec):
+    end_time = time.perf_counter() + duration_sec
+    x = 0.0
+    while time.perf_counter() < end_time:
+        x += 1.0  # scalar FP ops to generate heat
+
+def cpu_stress_benchmark(duration_sec=10):
+    cores = multiprocessing.cpu_count()
+    start = time.perf_counter()
+    with multiprocessing.Pool(processes=cores) as pool:
+        pool.map(stress_worker, [duration_sec] * cores)
+    end = time.perf_counter()
+    return {
+        "cores_used": cores,
+        "duration_sec": duration_sec,
+        "wall_time_sec": round(end - start, 4)
+    }
+
 
 if __name__ == "__main__":
     print_cpu_info()

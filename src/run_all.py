@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 
 from benchmarks import microbenchmarks as mb
 from benchmarks import workloads
+from src.benchmarks.compiler_becnhmark import benchmark_compile
+from src.hwinfo.cpu_info import cpu_stress_benchmark
 from utils.metrics import collect_system_info
 from utils.profiler import profile_function
 from utils.plotting import plot_cache_and_scaling, plot_workload_comparison
@@ -59,12 +61,24 @@ def run_all():
     results['Pointer Chasing Latency (random access)'] = profile_function(mb.measure_pointer_chasing_latency)[1]
     results['Cache Performance'] = mb.measure_cache_effectiveness()
     results['Thread Scalability'] = mb.measure_thread_scaling()
+    results["CPU Stress Benchmark"] = cpu_stress_benchmark(duration_sec=10)
 
     # Workload Benchmarks
     results["Sorting Benchmarks"] = workloads.compare_sorting_methods()
     results["Join Benchmarks"] = workloads.run_join_benchmark()
     results["ML Benchmark (scikit-learn)"] = workloads.run_ml_benchmark()
     results["ML Benchmark (sklearn vs PyTorch)"] = workloads.run_ml_benchmark_comparison()
+
+    gcc_env = os.environ.copy()
+    gcc_env["CC"] = "gcc"
+
+    clang_env = os.environ.copy()
+    clang_env["CC"] = "clang"
+
+    results = {
+        "gcc": benchmark_compile("make clean && make -j8", env=gcc_env),
+        "clang": benchmark_compile("make clean && make -j8", env=clang_env)
+    }
 
     # Save JSON
     json_path = os.path.join(RESULTS_DIR, f"benchmark_{results['run_id']}.json")
