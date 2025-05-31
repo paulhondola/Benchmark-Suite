@@ -15,18 +15,20 @@ Develop a comprehensive benchmarking toolkit that tests and compares the efficie
 ### 🗂️ Benchmark Design
 
 Develop or adapt microbenchmarks to evaluate:
-Integer and floating-point throughput
-Memory latency and bandwidth
-Cache performance (L1/L2/L3)
-Thread scalability (multi-core and hyperthreading)
+
+- Integer and floating-point throughput
+- Memory latency and bandwidth
+- Cache performance (L1/L2/L3)
+- Thread scalability (multi-core and hyperthreading)
 
 ### 📊 Workload Selection
 
 Implement a selection of real-world workloads such as:
-Sorting large datasets
-Join operations on large tables
-Machine learning inference/training (e.g., scikit-learn or TensorFlow)
-Simple SQL query benchmarks using various databases
+
+- Sorting large datasets
+- Join operations on large tables
+- Machine learning inference/training (e.g., scikit-learn or TensorFlow)
+- Simple SQL query benchmarks using various databases
 
 ### 🖥️ Testbed Configuration
 
@@ -41,30 +43,20 @@ Optionally include energy consumption metrics if supported by the system
 ### 🔍 Performance Analysis
 
 Analyze benchmark results to determine performance bottlenecks
+
 Compare and interpret differences between platforms
+
 Discuss the trade-offs in performance vs. cost, power, or scalability
 
 ### 📦 Deliverables:
 
 Benchmark Suite: All code and scripts, well-documented and runnable.
+
 Written Report: Must include methodology, benchmarking results, charts/plots, and a critical discussion of findings.
+
 Evaluation Criteria:
-Technical correctness and completeness of benchmarks
-Quality and reproducibility of experiments
-Depth of analysis and interpretation of results
-Clarity and structure of the written report
 
-## 🔧 Project Structure Overview
-
-benchmark_suite/
-└── src/
-├── benchmarks/
-│ ├── microbenchmarks.py 📏 CPU & memory micro-tests
-│ ├── ml_workloads.py 🤖 Machine learning tasks
-│ └── sql_benchmarks.py 🗃️ SQL performance benchmarks
-├── utils/
-│ ├── metrics.py 🧠 System metrics collector
-│ └── profiler.py 🔍 Profiler for timing & usage
-├── run_all.py 🚀 Unified script to execute all benchmarks
-├── requirements.txt 📦 Dependencies list
-└── report_template.md 📝 Reporting template
+- Technical correctness and completeness of benchmarks
+- Quality and reproducibility of experiments
+- Depth of analysis and interpretation of results
+- Clarity and structure of the written report
