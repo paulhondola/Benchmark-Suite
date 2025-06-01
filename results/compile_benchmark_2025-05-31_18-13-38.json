@@ -1,0 +1,12 @@
+{
+  "gcc": {
+    "execution_time_sec": 9.387,
+    "avg_cpu_percent": 12.2,
+    "memory_delta_MB": 0.05
+  },
+  "clang": {
+    "execution_time_sec": 8.2208,
+    "avg_cpu_percent": 3.1,
+    "memory_delta_MB": 0.03
+  }
+}
