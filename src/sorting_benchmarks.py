@@ -42,8 +42,8 @@ def run_sorting_benchmarks():
 
 	data = {
 		"Config Metadata": config["sorting_benchmarks"],
-		"System Info": collect_hw_info(),
-		"Benchmark Results": results
+		"Benchmark Results": results,
+		"System Info": collect_hw_info()
 	}
 
 	save_results(data, "sorting_benchmarks")

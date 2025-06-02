@@ -1,0 +1,59 @@
+{
+  "TensorFlow GPU": {
+    "Config Metadata": {
+      "n_samples": 1000,
+      "n_features": 20,
+      "batch_size": 32,
+      "epochs": 10
+    },
+    "Benchmark Results": {
+      "Device": "/CPU:0",
+      "Model Summary": null,
+      "Training Time (s)": 0.5789,
+      "Inference Time (s)": 0.0505,
+      "Accuracy": 0.623
+    },
+    "System Info": {
+      "cpu": {
+        "platform": "Darwin",
+        "architecture": "arm64",
+        "cpu": "Apple M1 Pro",
+        "logical_cores": 10,
+        "physical_cores": 10,
+        "cpu_freq_mhz": 3228,
+        "cpu_freq_per_core_mhz": "Unavailable on this platform",
+        "cpu_usage_percent_total": 5.3,
+        "cpu_usage_per_core_percent": [
+          21.0,
+          22.0,
+          8.9,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "gpu:": {
+        "error": "Cannot run `powermetrics`. Try running with sudo or grant Full Disk Access."
+      },
+      "memory": {
+        "ram_total_gb": 16.0,
+        "ram_used_gb": 6.38,
+        "ram_free_gb": 4.14,
+        "ram_usage_percent": 74.1
+      },
+      "cache": {
+        "platform": "Darwin",
+        "cache_info": {
+          "L1 Data Cache": 65536,
+          "L1 Instruction Cache": 131072,
+          "L2 Cache": 4194304,
+          "L3 Cache": null
+        }
+      }
+    }
+  }
+}

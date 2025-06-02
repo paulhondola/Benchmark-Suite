@@ -113,8 +113,8 @@ def run_microbenchmarks():
 
     data = {
 		"Config Metadata": config["microbenchmarks"],
-		"System Info": collect_hw_info(),
-		"Benchmark Results": results
+		"Benchmark Results": results,
+		"System Info": collect_hw_info()
 	}
 
     save_results(data, "micro_benchmarks")

@@ -37,13 +37,15 @@ def run_compile_benchmarks():
 	clang_env = os.environ.copy()
 	clang_env["CC"] = "clang"
 
+	results = {
+		"gcc": benchmark_compile("make clean && make -j8", env=gcc_env, label="gcc", path=SQLITE_DIR),
+  		"clang": benchmark_compile("make clean && make -j8", env=clang_env, label="clang", path=SQLITE_DIR)
+	}
+
 	data = {
 	    "Config Metadata": "",
-	    "System Info": collect_hw_info(),
-		"Benchmark Results": {
-	        "gcc": benchmark_compile("make clean && make -j8", env=gcc_env, label="gcc", path=SQLITE_DIR),
-	        "clang": benchmark_compile("make clean && make -j8", env=clang_env, label="clang", path=SQLITE_DIR)
-		}
+		"Benchmark Results": results,
+		"System Info": collect_hw_info()
     }
 
 	save_results(data, "compile_benchmarks")

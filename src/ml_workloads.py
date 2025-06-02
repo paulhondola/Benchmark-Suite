@@ -1,47 +1,90 @@
 import time
+import platform
 import torch
 import torch.nn as nn
 import torch.optim as optim
-import json
-import os
-from datetime import datetime
-from sklearn.linear_model import LogisticRegression
+import tensorflow as tf
 from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 from utils import load_config, save_results
 from hwinfo import collect_hw_info
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, ExtraTreesClassifier
+from sklearn.linear_model import LogisticRegression, Ridge, Lasso, ElasticNet
+from sklearn.svm import SVC
+from sklearn.naive_bayes import GaussianNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neural_network import MLPClassifier
 
-def ml_train_infer_sklearn(n_samples=100_000, n_features=20):
+def run_sklearn_model(model_name, n_samples, n_features, max_iter):
     X, y = make_classification(n_samples=n_samples, n_features=n_features, random_state=42)
-    split = int(n_samples * 0.8)
-    X_train, X_test = X[:split], X[split:]
-    y_train = y[:split]
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-    model = LogisticRegression(max_iter=1000)
+    model_map = {
+        "logistic_regression": LogisticRegression(max_iter=max_iter),
+        "ridge": Ridge(max_iter=max_iter),
+        "lasso": Lasso(max_iter=max_iter),
+        "elasticnet": ElasticNet(max_iter=max_iter),
+        "random_forest": RandomForestClassifier(n_estimators=100),
+        "extra_trees": ExtraTreesClassifier(n_estimators=100),
+        "gradient_boosting": GradientBoostingClassifier(),
+        "svc": SVC(),
+        "gaussian_nb": GaussianNB(),
+        "knn": KNeighborsClassifier(),
+        "mlp": MLPClassifier(max_iter=max_iter)
+    }
+
+    model = model_map.get(model_name)
+    if model is None:
+        return {"error": f"Unknown model type: {model_name}"}
+
     start_train = time.perf_counter()
     model.fit(X_train, y_train)
     end_train = time.perf_counter()
 
     start_infer = time.perf_counter()
-    _ = model.predict(X_test)
+    y_pred = model.predict(X_test)
     end_infer = time.perf_counter()
 
     return {
-        "train_time_sec": round(end_train - start_train, 4),
-        "inference_time_sec": round(end_infer - start_infer, 4)
+        "Training Time (s)": round(end_train - start_train, 4),
+        "Inference Time (s)": round(end_infer - start_infer, 4),
+        "Accuracy": round(accuracy_score(y_test, y_pred), 4),
     }
 
-def run_ml_benchmark():
-    return ml_train_infer_sklearn()
+def run_sklearn_workload(config):
+    model_name = config["model"]
+    n_samples = config["n_samples"]
+    n_features = config["n_features"]
+    max_iter = config["max_iter"]
 
-def ml_train_infer_pytorch(batch_size=256, epochs=5, use_gpu=False):
-    device = torch.device("cuda" if use_gpu and torch.cuda.is_available() else "cpu")
-    X = torch.randn(100_000, 20).to(device)
-    y = torch.randint(0, 2, (100_000,)).to(device)
-    X_train, X_test = X[:80_000], X[80_000:]
-    y_train, y_test = y[:80_000], y[80_000:]
+    results = run_sklearn_model(model_name, n_samples, n_features, max_iter)
+
+    return {
+        "Config Metadata": config,
+        "Benchmark Result": results,
+        "System Info": collect_hw_info()
+    }
+
+def get_torch_device(use_gpu):
+    if use_gpu:
+        if platform.system() == "Darwin" and torch.backends.mps.is_available():
+            return torch.device("mps")
+        elif torch.cuda.is_available():
+            return torch.device("cuda")
+    return torch.device("cpu")
+
+def run_pytorch_model(n_samples, n_features, batch_size, epochs, use_gpu=False):
+    device = get_torch_device(use_gpu)
+
+    X = torch.randn(n_samples, n_features).to(device)
+    y = torch.randint(0, 2, (n_samples,)).to(device)
+    split = int(0.8 * n_samples)
+    X_train, X_test = X[:split], X[split:]
+    y_train, y_test = y[:split], y[split:]
 
     model = nn.Sequential(
-        nn.Linear(20, 64),
+        nn.Linear(n_features, 64),
         nn.ReLU(),
         nn.Linear(64, 2)
     ).to(device)
@@ -50,11 +93,10 @@ def ml_train_infer_pytorch(batch_size=256, epochs=5, use_gpu=False):
     optimizer = optim.Adam(model.parameters(), lr=0.001)
 
     start_train = time.perf_counter()
-    for epoch in range(epochs):
+    for _ in range(epochs):
         for i in range(0, len(X_train), batch_size):
             x_batch = X_train[i:i+batch_size]
             y_batch = y_train[i:i+batch_size]
-
             optimizer.zero_grad()
             output = model(x_batch)
             loss = criterion(output, y_batch)
@@ -64,33 +106,100 @@ def ml_train_infer_pytorch(batch_size=256, epochs=5, use_gpu=False):
 
     start_infer = time.perf_counter()
     with torch.no_grad():
-        _ = model(X_test)
+        outputs = model(X_test)
+        y_pred = torch.argmax(outputs, dim=1)
+    end_infer = time.perf_counter()
+
+    correct = (y_pred == y_test).sum().item()
+    accuracy = correct / y_test.size(0)
+
+    return {
+        "Device": str(device),
+        "Training Time (s)": round(end_train - start_train, 4),
+        "Inference Time (s)": round(end_infer - start_infer, 4),
+        "Accuracy": round(accuracy, 4)
+    }
+
+def run_pytorch_workload(config, use_gpu):
+    n_samples = config["n_samples"]
+    n_features = config["n_features"]
+    batch_size = config["batch_size"]
+    epochs = config["epochs"]
+
+    results = run_pytorch_model(n_samples, n_features, batch_size, epochs, use_gpu)
+
+    return {
+        "Config Metadata": config,
+        "Benchmark Results": results,
+        "System Info": collect_hw_info()
+    }
+
+def run_tensorflow_model(n_samples, n_features, batch_size, epochs, use_gpu):
+    device_name = "/GPU:0" if use_gpu and tf.config.list_physical_devices("GPU") else "/CPU:0"
+
+    x = tf.random.normal((n_samples, n_features))
+    y = tf.random.uniform((n_samples,), maxval=2, dtype=tf.int32)
+    y = tf.keras.utils.to_categorical(y, 2)
+
+    model = tf.keras.Sequential([
+        tf.keras.layers.Dense(64, activation="relu", input_shape=(n_features,)),
+        tf.keras.layers.Dense(2, activation="softmax")
+    ])
+
+    model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
+
+    start_train = time.perf_counter()
+    with tf.device(device_name):
+        model.fit(x, y, batch_size=batch_size, epochs=epochs, verbose=0)
+    end_train = time.perf_counter()
+
+    start_infer = time.perf_counter()
+    with tf.device(device_name):
+        _ = model.predict(x, verbose=0)
     end_infer = time.perf_counter()
 
     return {
-        "device": str(device),
-        "train_time_sec": round(end_train - start_train, 4),
-        "inference_time_sec": round(end_infer - start_infer, 4)
+        "Device": device_name,
+        "Training Time (s)": round(end_train - start_train, 4),
+        "Inference Time (s)": round(end_infer - start_infer, 4),
+        "Accuracy": round(model.evaluate(x, y, verbose=0)[1], 4)
     }
 
-def run_ml_benchmark_comparison():
-    return {
-        "scikit_learn": ml_train_infer_sklearn(),
-        "pytorch_cpu": ml_train_infer_pytorch(use_gpu=False),
-        "pytorch_gpu": ml_train_infer_pytorch(use_gpu=True)
+def run_tensorflow_workload(config, use_gpu):
+	n_samples = config["n_samples"]
+	n_features = config["n_features"]
+	batch_size = config["batch_size"]
+	epochs = config["epochs"]
+
+	results = run_tensorflow_model(n_samples, n_features, batch_size, epochs, use_gpu)
+
+	return {
+		"Config Metadata": config,
+		"Benchmark Results": results,
+		"System Info": collect_hw_info()
+	}
+
+def run_ml_workloads():
+    config = load_config()
+    config = config["ml_workloads"]
+
+    sklearn = run_sklearn_workload(config["sklearn"])
+    pytorch_cpu = run_pytorch_workload(config["pytorch"], use_gpu=False)
+    pytorch_gpu = run_pytorch_workload(config["pytorch"], use_gpu=True)
+    tf_cpu = run_tensorflow_workload(config["tensorflow"], use_gpu=False)
+    tf_gpu = run_tensorflow_workload(config["tensorflow"], use_gpu=True)
+
+    data = {
+        "SKLearn": sklearn,
+        "PyTorch CPU": pytorch_cpu,
+        "PyTorch GPU": pytorch_gpu,
+        "TensorFlow CPU": tf_cpu,
+        "TensorFlow GPU": tf_gpu
     }
 
-def run_all_ml_benchmarks():
-    return {
-        "ML Benchmark (scikit-learn)": run_ml_benchmark(),
-        "ML Benchmark (sklearn vs PyTorch)": run_ml_benchmark_comparison()
-    }
+    save_results(data, "ml_workloads")
 
 if __name__ == "__main__":
-    results = run_all_ml_benchmarks()
-    print("=== ML Benchmark Finished ===")
-    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    out_path = os.path.join(RESULTS_DIR, f"ml_benchmarks_{timestamp}.json")
-    with open(out_path, "w") as f:
-        json.dump(results, f, indent=2)
-    print(f"✅ Results saved to: {out_path}")
+    print("Starting machine learning workloads")
+    run_ml_workloads()
+    print("Machine learning workloads finished")
