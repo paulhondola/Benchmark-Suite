@@ -1,0 +1,22 @@
+{
+  "ML Benchmark (scikit-learn)": {
+    "train_time_sec": 0.0293,
+    "inference_time_sec": 0.0003
+  },
+  "ML Benchmark (sklearn vs PyTorch)": {
+    "scikit_learn": {
+      "train_time_sec": 0.0225,
+      "inference_time_sec": 0.0003
+    },
+    "pytorch_cpu": {
+      "device": "cpu",
+      "train_time_sec": 0.5792,
+      "inference_time_sec": 0.0021
+    },
+    "pytorch_gpu": {
+      "device": "cpu",
+      "train_time_sec": 0.6608,
+      "inference_time_sec": 0.003
+    }
+  }
+}

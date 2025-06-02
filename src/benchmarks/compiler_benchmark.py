@@ -45,12 +45,9 @@ def run_compile_benchmarks():
 
 if __name__ == "__main__":
     results = run_compile_benchmarks()
-    print("\n=== Compile Benchmark Results ===")
-    for compiler, data in results.items():
-        print(f"[{compiler}] ->", data)
-
+    print("=== Compilation Benchmark Finished ===")
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     out_path = os.path.join(RESULTS_DIR, f"compile_benchmark_{timestamp}.json")
     with open(out_path, "w") as f:
         json.dump(results, f, indent=2)
-    print(f"\n✅ Results saved to: {out_path}")
+    print(f"✅ Results saved to: {out_path}")

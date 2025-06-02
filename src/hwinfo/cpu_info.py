@@ -1,63 +1,58 @@
-#!/usr/bin/env python3
 import psutil
+import platform
+import subprocess
+import json
 
-def print_cpu_info():
-    """
-    Prints per-core and overall CPU usage, number of logical vs. physical cores,
-    and current RAM usage.
-    """
-    print("=== CPU INFO ===")
+def get_macos_chip_name():
+    try:
+        output = subprocess.check_output(
+            ["sysctl", "-n", "machdep.cpu.brand_string"],
+            stderr=subprocess.DEVNULL
+        )
+        return output.decode().strip()
+    except Exception:
+        return None
 
-    # 1.1 Per-CPU usage (% over a 1-second interval)
-    print("Per-core CPU usage (%):")
-    per_cpu = psutil.cpu_percent(interval=1, percpu=True)
-    for idx, pct in enumerate(per_cpu):
-        print(f"  CPU {idx}: {pct:.1f}%")
+def get_macos_hardware_overview():
+    try:
+        output = subprocess.check_output(
+            ["system_profiler", "SPHardwareDataType"],
+            stderr=subprocess.DEVNULL
+        )
+        lines = output.decode().splitlines()
+        for line in lines:
+            if "Chip" in line or "Processor Name" in line:
+                return line.strip()
+    except Exception:
+        return None
 
-    # 1.2 Overall CPU usage
-    overall = psutil.cpu_percent(interval=1)
-    print(f"Overall CPU usage: {overall:.1f}%")
-
-    # 1.3 CPU counts
-    logical = psutil.cpu_count(logical=True)
-    physical = psutil.cpu_count(logical=False)
-    print(f"Logical CPUs : {logical}")
-    print(f"Physical Cores: {physical}")
-
+def collect_cpu_info():
+    chip = get_macos_chip_name() or get_macos_hardware_overview()
+    cpu_brand = chip if chip else platform.processor()
     freq = psutil.cpu_freq()
-    if freq:
-        print(f"CPU Frequency: {freq.current:.1f} MHz")
-    else:
-        print("CPU Frequency: (unavailable via psutil on macOS)")
+    core_usages = psutil.cpu_percent(interval=1, percpu=True)
 
-    # 1.5 RAM usage
-    mem = psutil.virtual_memory()
-    print(f"Total RAM: {mem.total / (1024**3):.2f} GiB")
-    print(f"Used RAM : {mem.used / (1024**3):.2f} GiB ({mem.percent:.1f}%)")
-    print(f"Free RAM : {mem.available / (1024**3):.2f} GiB ({100 - mem.percent:.1f}%)")
+    try:
+        per_core_freq = psutil.cpu_freq(percpu=True)
+        if isinstance(per_core_freq, list) and len(per_core_freq) > 1:
+            freq_per_core = [round(f.current, 2) for f in per_core_freq]
+        else:
+            freq_per_core = "Unavailable on this platform"
+    except Exception:
+        freq_per_core = "Unavailable on this platform"
 
-
-import time
-import multiprocessing
-
-def stress_worker(duration_sec):
-    end_time = time.perf_counter() + duration_sec
-    x = 0.0
-    while time.perf_counter() < end_time:
-        x += 1.0  # scalar FP ops to generate heat
-
-def cpu_stress_benchmark(duration_sec=10):
-    cores = multiprocessing.cpu_count()
-    start = time.perf_counter()
-    with multiprocessing.Pool(processes=cores) as pool:
-        pool.map(stress_worker, [duration_sec] * cores)
-    end = time.perf_counter()
     return {
-        "cores_used": cores,
-        "duration_sec": duration_sec,
-        "wall_time_sec": round(end - start, 4)
+        "platform": platform.system(),
+        "architecture": platform.machine(),
+        "cpu": cpu_brand,
+        "logical_cores": psutil.cpu_count(logical=True),
+        "physical_cores": psutil.cpu_count(logical=False),
+        "cpu_freq_mhz": round(freq.current, 2) if freq else None,
+        "cpu_freq_per_core_mhz": freq_per_core,
+        "cpu_usage_percent_total": round(sum(core_usages) / len(core_usages), 1),
+        "cpu_usage_per_core_percent": core_usages
     }
 
-
 if __name__ == "__main__":
-    print_cpu_info()
+    cpu_info = collect_cpu_info()
+    print(json.dumps(cpu_info, indent=2))

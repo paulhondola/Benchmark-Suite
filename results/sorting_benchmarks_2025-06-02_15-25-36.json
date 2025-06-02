@@ -1,0 +1,10 @@
+{
+  "Sorting Benchmarks": {
+    "numpy_sort": {
+      "execution_time_sec": 0.8311
+    },
+    "pandas_sort": {
+      "execution_time_sec": 1.5683
+    }
+  }
+}

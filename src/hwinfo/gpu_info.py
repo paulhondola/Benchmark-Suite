@@ -1,13 +1,8 @@
-#!/usr/bin/env python3
 import subprocess
 import re
+import json
 
 def parse_powermetrics_gpu(output):
-    """
-    Parses `powermetrics --samplers gpu_power -n 1` output and returns:
-      (gpu_cores_active_pct, gpu_memory_active_pct)
-    If not found, returns (None, None).
-    """
     gpu_util = None
     mem_util = None
 
@@ -22,29 +17,19 @@ def parse_powermetrics_gpu(output):
 
     return gpu_util, mem_util
 
-def print_gpu_info():
-    """
-    Uses `powermetrics` to sample Apple Silicon GPU usage. Requires sudo
-    or Full Disk Access to run without error.
-    """
-    print("=== GPU INFO ===")
+def collect_gpu_info():
     cmd = ["powermetrics", "--samplers", "gpu_power", "-n", "1"]
     try:
         output = subprocess.check_output(cmd, stderr=subprocess.DEVNULL).decode()
         gpu_pct, mem_pct = parse_powermetrics_gpu(output)
-
-        if gpu_pct is not None:
-            print(f"GPU Cores Active       : {gpu_pct}%")
-        else:
-            print("GPU Cores Active       : (not reported)")
-
-        if mem_pct is not None:
-            print(f"GPU Memory Cores Active: {mem_pct}%")
-        else:
-            print("GPU Memory Cores Active: (not reported)")
-
+        return {
+            "gpu_cores_active_percent": gpu_pct if gpu_pct is not None else "(not reported)",
+            "gpu_memory_cores_active_percent": mem_pct if mem_pct is not None else "(not reported)"
+        }
     except Exception:
-        print("Cannot run `powermetrics`. Try running with sudo or grant Full Disk Access.")
+        return {
+            "error": "Cannot run `powermetrics`. Try running with sudo or grant Full Disk Access."
+        }
 
 if __name__ == "__main__":
-    print_gpu_info()
+    print(json.dumps(collect_gpu_info(), indent=2))

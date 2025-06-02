@@ -1,0 +1,14 @@
+{
+  "Sorting Benchmarks": {
+    "numpy_sort": {
+      "execution_time_sec": 0.858
+    },
+    "pandas_sort": {
+      "execution_time_sec": 0.1032
+    }
+  },
+  "Config": {
+    "numpy_array_size": 10000000,
+    "pandas_row_count": 1000000
+  }
+}

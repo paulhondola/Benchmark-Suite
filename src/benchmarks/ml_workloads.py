@@ -1,56 +1,15 @@
 import time
-import numpy as np
-import pandas as pd
 import torch
 import torch.nn as nn
 import torch.optim as optim
-
+import json
+import os
+from datetime import datetime
 from sklearn.linear_model import LogisticRegression
 from sklearn.datasets import make_classification
 
-def sort_numpy_array(size=10_000_000):
-    arr = np.random.rand(size)
-    start = time.perf_counter()
-    sorted_arr = np.sort(arr)
-    end = time.perf_counter()
-    return {"execution_time_sec": round(end - start, 4)}
-
-def sort_pandas_dataframe(rows=1_000_000):
-    df = pd.DataFrame({
-        "id": np.arange(rows),
-        "value": np.random.rand(rows)
-    })
-    start = time.perf_counter()
-    df_sorted = df.sort_values(by="value")
-    end = time.perf_counter()
-    return {"execution_time_sec": round(end - start, 4)}
-
-def compare_sorting_methods():
-    return {
-        "numpy_sort": sort_numpy_array(),
-        "pandas_sort": sort_pandas_dataframe()
-    }
-
-def join_pandas_dataframes(left_size=1_000_000, right_size=500_000):
-    left = pd.DataFrame({
-        "id": np.arange(left_size),
-        "value_left": np.random.rand(left_size)
-    })
-
-    right = pd.DataFrame({
-        "id": np.random.choice(np.arange(left_size), size=right_size, replace=False),
-        "value_right": np.random.rand(right_size)
-    })
-
-    start = time.perf_counter()
-    joined = pd.merge(left, right, on="id", how="inner")
-    end = time.perf_counter()
-    return {"execution_time_sec": round(end - start, 4)}
-
-def run_join_benchmark():
-    return {
-        "pandas_inner_join": join_pandas_dataframes()
-    }
+RESULTS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "results"))
+os.makedirs(RESULTS_DIR, exist_ok=True)
 
 def ml_train_infer_sklearn(n_samples=100_000, n_features=20):
     X, y = make_classification(n_samples=n_samples, n_features=n_features, random_state=42)
@@ -121,3 +80,18 @@ def run_ml_benchmark_comparison():
         "pytorch_cpu": ml_train_infer_pytorch(use_gpu=False),
         "pytorch_gpu": ml_train_infer_pytorch(use_gpu=True)
     }
+
+def run_all_ml_benchmarks():
+    return {
+        "ML Benchmark (scikit-learn)": run_ml_benchmark(),
+        "ML Benchmark (sklearn vs PyTorch)": run_ml_benchmark_comparison()
+    }
+
+if __name__ == "__main__":
+    results = run_all_ml_benchmarks()
+    print("=== ML Benchmark Finished ===")
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    out_path = os.path.join(RESULTS_DIR, f"ml_benchmarks_{timestamp}.json")
+    with open(out_path, "w") as f:
+        json.dump(results, f, indent=2)
+    print(f"✅ Results saved to: {out_path}")

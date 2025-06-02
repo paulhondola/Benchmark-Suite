@@ -2,7 +2,12 @@ import time
 import random
 import numpy as np
 import os
+import json
+from datetime import datetime
 from multiprocessing import Pool
+
+RESULTS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "results"))
+os.makedirs(RESULTS_DIR, exist_ok=True)
 
 def measure_fp_throughput(size=1000):
     x = np.random.rand(size, size)
@@ -87,3 +92,24 @@ def measure_thread_scaling(max_threads=8, total_work=100_000_000):
         end = time.perf_counter()
         results.append((threads, round(end - start, 4)))
     return {"cpu_count": cpu_count, "results": results}
+
+def run_all_microbenchmarks():
+    return {
+        "Floating Point Throughput": measure_fp_throughput(),
+        "Scalar FP Add Latency": measure_scalar_fp_add(),
+        "Memory Bandwidth": measure_memory_bandwidth(),
+        "Memory Read Bandwidth": measure_memory_read_bandwidth(),
+        "Memory Latency": measure_memory_latency(),
+        "Pointer Chasing Latency": measure_pointer_chasing_latency(),
+        "Cache Performance": measure_cache_effectiveness(),
+        "Thread Scalability": measure_thread_scaling()
+    }
+
+if __name__ == "__main__":
+    results = run_all_microbenchmarks()
+    print("=== Microbenchmarks Finished ===")
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    out_path = os.path.join(RESULTS_DIR, f"microbenchmarks_{timestamp}.json")
+    with open(out_path, "w") as f:
+        json.dump(results, f, indent=2)
+    print(f"✅ Results saved to: {out_path}")

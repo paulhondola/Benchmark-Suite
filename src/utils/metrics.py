@@ -76,3 +76,6 @@ def collect_system_info():
         info["gpu_type"] = "Unknown"
 
     return info
+
+if __name__ == "__main__":
+	print(collect_system_info())

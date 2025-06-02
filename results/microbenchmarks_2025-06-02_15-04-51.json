@@ -1,0 +1,81 @@
+{
+  "Floating Point Throughput": {
+    "execution_time_sec": 0.0148
+  },
+  "Scalar FP Add Latency": {
+    "execution_time_sec": 2.4944
+  },
+  "Memory Bandwidth": {
+    "execution_time_sec": 0.151
+  },
+  "Memory Read Bandwidth": {
+    "execution_time_sec": 7.9279
+  },
+  "Memory Latency": {
+    "execution_time_sec": 0.0716
+  },
+  "Pointer Chasing Latency": {
+    "execution_time_sec": 0.1891
+  },
+  "Cache Performance": {
+    "results": [
+      [
+        4,
+        1.1e-05
+      ],
+      [
+        64,
+        5.6e-05
+      ],
+      [
+        512,
+        0.000442
+      ],
+      [
+        2048,
+        0.001818
+      ],
+      [
+        8192,
+        0.007231
+      ]
+    ]
+  },
+  "Thread Scalability": {
+    "cpu_count": 10,
+    "results": [
+      [
+        1,
+        4.4289
+      ],
+      [
+        2,
+        2.4803
+      ],
+      [
+        3,
+        1.8177
+      ],
+      [
+        4,
+        1.4428
+      ],
+      [
+        5,
+        1.3866
+      ],
+      [
+        6,
+        1.2603
+      ],
+      [
+        7,
+        1.172
+      ],
+      [
+        8,
+        1.1224
+      ]
+    ]
+  }
+}
