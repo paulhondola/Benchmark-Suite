@@ -18,7 +18,7 @@ A cross-platform benchmarking suite designed to evaluate CPU, GPU, memory, and c
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourname/benchmark-suite.git
+git clone https://github.com/paulhondola/benchmark-suite.git
 cd benchmark-suite
 ```
 
