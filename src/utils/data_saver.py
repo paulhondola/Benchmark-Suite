@@ -1,7 +1,9 @@
 import os
 import json
 from datetime import datetime
-from utils import RESULTS_DIR
+
+RESULTS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "results"))
+os.makedirs(RESULTS_DIR, exist_ok=True)
 
 def save_results(results, filename):
 	timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")

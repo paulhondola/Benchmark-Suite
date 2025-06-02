@@ -7,6 +7,10 @@
 		"memory_stride": 64,
 		"thread_total_work": 1000000
 	},
+	"sorting_benchmarks": {
+		"numpy_array_size": 10000000,
+		"pandas_dataframe_size": 1000000
+	},
 	"ml_workloads": {
 		"batch_size": 32,
 		"iterations": 10

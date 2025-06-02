@@ -1,13 +1,11 @@
-# --- workloads_sorting.py ---
 import time
 import numpy as np
 import pandas as pd
 import json
 import os
 from datetime import datetime
-
-RESULTS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "results"))
-os.makedirs(RESULTS_DIR, exist_ok=True)
+from utils import load_config, save_results
+from hwinfo import collect_hw_info
 
 def sort_numpy_array(size):
     arr = np.random.rand(size)
@@ -32,27 +30,25 @@ def compare_sorting_methods(size, rows):
         "pandas_sort": sort_pandas_dataframe(rows)
     }
 
-def run_all_sorting_benchmarks(size, rows):
-    return {
-        "Sorting Benchmarks": compare_sorting_methods( size, rows),
-        "Config": {
-            "numpy_array_size": size,
-            "pandas_row_count": rows
-        }
-    }
+def run_sorting_benchmarks():
+	config = load_config()
+
+	numpy_size = config["sorting_benchmarks"]["numpy_array_size"]
+	pandas_size = config["sorting_benchmarks"]["pandas_dataframe_size"]
+
+	results = {
+		"Sorting Benchmarks": compare_sorting_methods(numpy_size, pandas_size),
+	}
+
+	data = {
+		"Config Metadata": config["sorting_benchmarks"],
+		"System Info": collect_hw_info(),
+		"Benchmark Results": results
+	}
+
+	save_results(data, "sorting_benchmarks")
 
 if __name__ == "__main__":
-	numpy_size = 100_000_000
-	pandas_size = 10_000_000
-	results = run_all_sorting_benchmarks(numpy_size, pandas_size)
-
-	print("=== Sorting Benchmarks Finished ===")
-
-	timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-
-	out_path = os.path.join(RESULTS_DIR, f"sorting_benchmarks_{timestamp}.json")
-
-	with open(out_path, "w") as f:
-		json.dump(results, f, indent=2)
-
-	print(f"✅ Results saved to: {out_path}")
+	print("Starting Sorting Benchmarks")
+	run_sorting_benchmarks()
+	print("Sorting Benchmarks Finished")

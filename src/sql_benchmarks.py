@@ -1,5 +1,7 @@
 import sqlite3
 import time
+from utils import load_config, save_results
+from hwinfo import collect_hw_info
 
 def simple_query(row_count=100000, threshold=50000):
     conn = sqlite3.connect(':memory:')

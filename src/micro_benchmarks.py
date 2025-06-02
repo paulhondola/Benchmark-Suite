@@ -90,7 +90,7 @@ def measure_thread_scaling(max_threads, total_work):
         results.append((threads, round(end - start, 4)))
     return {"results": results}
 
-def run_all_microbenchmarks():
+def run_microbenchmarks():
     config = load_config()
 
     matrix_size = config["microbenchmarks"].get("matrix_size", 1000)
@@ -100,23 +100,26 @@ def run_all_microbenchmarks():
     max_threads = config["microbenchmarks"].get("max_threads", 8)
     thread_total_work = config["microbenchmarks"].get("thread_total_work", 100_000_000)
 
-    return {
-        "Config Metadata": config["microbenchmarks"],
-        "System Info": collect_hw_info(),
-        "Benchmark Result": {
-	        "Floating Point Throughput": measure_fp_throughput(matrix_size),
-	        "Scalar FP Add Latency": measure_scalar_fp_add(vector_size),
-	        "Memory Bandwidth": measure_memory_bandwidth(vector_size),
-	        "Memory Read Bandwidth": measure_memory_read_bandwidth(vector_size),
-	        "Memory Latency": measure_memory_latency(memory_jumps, stride),
-	        "Pointer Chasing Latency": measure_pointer_chasing_latency(vector_size),
-	        "Cache Performance": measure_cache_effectiveness(),
-	        "Thread Scalability": measure_thread_scaling(max_threads, thread_total_work)
-        }
-    }
+    results = {
+		"Floating Point Throughput": measure_fp_throughput(matrix_size),
+		"Scalar FP Add Latency": measure_scalar_fp_add(vector_size),
+		"Memory Bandwidth": measure_memory_bandwidth(vector_size),
+		"Memory Read Bandwidth": measure_memory_read_bandwidth(vector_size),
+		"Memory Latency": measure_memory_latency(memory_jumps, stride),
+		"Pointer Chasing Latency": measure_pointer_chasing_latency(vector_size),
+		"Cache Performance": measure_cache_effectiveness(),
+		"Thread Scalability": measure_thread_scaling(max_threads, thread_total_work)
+	}
+
+    data = {
+		"Config Metadata": config["microbenchmarks"],
+		"System Info": collect_hw_info(),
+		"Benchmark Results": results
+	}
+
+    save_results(data, "micro_benchmarks")
 
 if __name__ == "__main__":
-	print("Staring Microbenchmarks")
-	results = run_all_microbenchmarks()
-	print("Microbenchmarks Finished")
-	save_results(results, "microbenchmarks")
+	print("Starting Micro Benchmarks")
+	run_microbenchmarks()
+	print("Micro Benchmarks Finished")

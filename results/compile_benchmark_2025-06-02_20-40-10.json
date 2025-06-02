@@ -1,0 +1,57 @@
+{
+  "Config Metadata": "",
+  "System Info": {
+    "cpu": {
+      "platform": "Darwin",
+      "architecture": "arm64",
+      "cpu": "Apple M1 Pro",
+      "logical_cores": 10,
+      "physical_cores": 10,
+      "cpu_freq_mhz": 3228,
+      "cpu_freq_per_core_mhz": "Unavailable on this platform",
+      "cpu_usage_percent_total": 8.6,
+      "cpu_usage_per_core_percent": [
+        29.7,
+        27.7,
+        6.0,
+        4.0,
+        4.0,
+        3.0,
+        4.0,
+        3.0,
+        3.0,
+        2.0
+      ]
+    },
+    "gpu:": {
+      "error": "Cannot run `powermetrics`. Try running with sudo or grant Full Disk Access."
+    },
+    "memory": {
+      "ram_total_gb": 16.0,
+      "ram_used_gb": 7.3,
+      "ram_free_gb": 5.04,
+      "ram_usage_percent": 68.5
+    },
+    "cache": {
+      "platform": "Darwin",
+      "cache_info": {
+        "L1 Data Cache": 65536,
+        "L1 Instruction Cache": 131072,
+        "L2 Cache": 4194304,
+        "L3 Cache": null
+      }
+    }
+  },
+  "Benchmark Results": {
+    "gcc": {
+      "execution_time_sec": 8.607298,
+      "avg_cpu_percent": 20.9,
+      "memory_delta_MB": -4.45
+    },
+    "clang": {
+      "execution_time_sec": 8.183261,
+      "avg_cpu_percent": 15.0,
+      "memory_delta_MB": 0.25
+    }
+  }
+}

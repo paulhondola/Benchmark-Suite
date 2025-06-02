@@ -7,9 +7,8 @@ import os
 from datetime import datetime
 from sklearn.linear_model import LogisticRegression
 from sklearn.datasets import make_classification
-
-RESULTS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "results"))
-os.makedirs(RESULTS_DIR, exist_ok=True)
+from utils import load_config, save_results
+from hwinfo import collect_hw_info
 
 def ml_train_infer_sklearn(n_samples=100_000, n_features=20):
     X, y = make_classification(n_samples=n_samples, n_features=n_features, random_state=42)
