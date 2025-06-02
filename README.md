@@ -34,6 +34,14 @@ pip install .
 
 ### 3. Running Benchmarks
 
+To run the benchmarks, execute the following commands in your terminal:
+
+```bash
+cd src
+```
+
+Then run each benchmark script:
+
 ```python
 python3 microbenchmarks.py
 python3 ml_benchmarks.py
@@ -56,6 +64,9 @@ Customize benchmark parameters inside the `config.json` file. This allows you to
     "memory_stride": 64,
     "thread_total_work": 100000000
   },
+  "compile_benchmarks": {
+		"compile_target": "/path_to_target_project"
+	},
   "ml_workloads": {
     "sklearn": {
       "model": "logistic_regression",
@@ -75,6 +86,10 @@ Customize benchmark parameters inside the `config.json` file. This allows you to
       "batch_size": 256,
       "epochs": 5
     }
+  },
+  "sql_benchmarks": {
+  	"row_count": 100000,
+	"threshold": 50000
   }
 }
 ```
