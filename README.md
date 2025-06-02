@@ -50,7 +50,7 @@ python3 compiler_benchmarks.py
 python3 sql_benchmarks.py
 ```
 
-### 4. Configiguration
+### 4. Configuration
 
 Customize benchmark parameters inside the `config.json` file. This allows you to specify the parameters:
 
@@ -100,6 +100,11 @@ Results are saved in the `results/` directory in structured JSON format. You can
 
 ```python
 {
+  "Config Metadata": { ... },
+  "Benchmark Result": {
+    "Floating Point Throughput": { "execution_time_sec": 1.232 },
+    ...
+  },
   "System Info": {
 	  "cpu": {
 	    "platform": "Darwin",
@@ -108,11 +113,6 @@ Results are saved in the `results/` directory in structured JSON format. You can
 	    "logical_cores": 10,
 	    ...
 	  }
-  }
-  "Config Metadata": { ... },
-  "Benchmark Result": {
-    "Floating Point Throughput": { "execution_time_sec": 1.232 },
-    ...
   }
 }
 ```
@@ -123,7 +123,7 @@ Results are saved in the `results/` directory in structured JSON format. You can
 - Linux: CPU + CUDA GPU (if available) **AMD GPU support in progress**
 - Windows: CPU + CUDA GPU (if available) **AMD GPU support tricky due to ROCm**
 
-### 7. Contributors
+### 7. Authors
 
 [Paul Hondola]
 [Dan Ghincul]
