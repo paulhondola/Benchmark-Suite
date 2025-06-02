@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+[project]
+dependencies = [
+	"numpy",
+	"pandas",
+	"scikit-learn",
+	"torch",
+	"tensorflow",
+	"tensorflow-macos; platform_system == 'Darwin'",
+	"tensorflow-metal; platform_system == 'Darwin'",
+	"matplotlib",
+	"psutil",
+	"py-cpuinfo",
+]
+name = "benchmark-suite"
+authors = [
+	{ name = "Paul Hondola", email = "paulhondola@gmail.com" },
+	{ name = "Dan Ghincul", email = "ghinculdan@icloud.com" },
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+requires-python = ">=3.8"
+version = "0.1.0"
+description = "Cross-platform benchmarking suite for ML, DB, Compiler, Sorting, Microbenchmarks and system metrics"

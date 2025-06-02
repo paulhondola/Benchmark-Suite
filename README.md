@@ -1,62 +1,114 @@
-# Benchmark-Suite
+# Benchmark Suite
 
-This repository contains a suite of benchmarks designed to evaluate the performance of various systems and applications. The benchmarks are categorized into different types, including microbenchmarks, machine learning workloads, and SQL performance tests.
+A cross-platform benchmarking suite designed to evaluate CPU, GPU, memory, and cache performance across diverse workloads, hardware setups, and software configurations.
 
-## 🎯 Objective:
+## Features
 
-Design and implement a benchmarking suite to evaluate the performance of different hardware and software configurations in executing data processing tasks. This project is intended to deepen your understanding of computer architecture, processor behavior, and system-level performance optimization.
+- Microbenchmarks: memory throughput, latency, FP performance, cache, thread scaling
+- Machine Learning workloads: PyTorch (CPU/GPU), scikit-learn, TensorFlow (macOS GPU via MPS)
+- Sort operations / Dot Product (NumPy, Pandas)
+- Compilation benchmarks (GCC vs Clang)
+- SQL database performance (SQLite, PostgreSQL)
+- Automatic system metadata collection (CPU, memory, cache, GPU)
+- Configuration through JSON file
+- Results saved in structured JSON with metadata
 
-## 🧾 Project Description:
+## Setup Instructions
 
-Develop a comprehensive benchmarking toolkit that tests and compares the efficiency of multiple computing environments. This includes different CPUs (e.g., ARM vs. x86), GPUs, memory hierarchies, and relevant software frameworks. The benchmark suite will include both synthetic microbenchmarks and real-world data processing tasks.
+### 1. Clone the Repository
 
-## 🧱 Core Tasks:
+```bash
+git clone https://github.com/yourname/benchmark-suite.git
+cd benchmark-suite
+```
 
-### 🗂️ Benchmark Design
+### 2. Install Dependencies
 
-Develop or adapt microbenchmarks to evaluate:
+Make sure you have Python 3.8+ installed. Then install dependencies using pyproject.toml:
 
-- Integer and floating-point throughput
-- Memory latency and bandwidth
-- Cache performance (L1/L2/L3)
-- Thread scalability (multi-core and hyperthreading)
+```python
+pip install .
+```
 
-### 📊 Workload Selection
+**Note: On macOS, Metal support for TensorFlow will be automatically installed via conditional requirements.**
 
-Implement a selection of real-world workloads such as:
+### 3. Running Benchmarks
 
-- Sorting large datasets
-- Join operations on large tables
-- Machine learning inference/training (e.g., scikit-learn or TensorFlow)
-- Simple SQL query benchmarks using various databases
+```python
+python3 microbenchmarks.py
+python3 ml_benchmarks.py
+python3 sorting_benchmarks.py
+python3 compiler_benchmarks.py
+python3 sql_benchmarks.py
+```
 
-### 🖥️ Testbed Configuration
+### 4. Configiguration
 
-Run benchmarks across at least two different hardware configurations (e.g., laptops, Raspberry Pi, cloud VMs)
-Vary software environments such as compilers (GCC vs. Clang), operating systems (Linux distros), or data processing tools (Spark, Pandas, PostgreSQL)
+Customize benchmark parameters inside the `config.json` file. This allows you to specify the parameters:
 
-### 📈 Data Collection and Metrics
+```JSON
+{
+  "microbenchmarks": {
+    "matrix_size": 1000,
+    "vector_size": 100000000,
+    "max_threads": 8,
+    "memory_jumps": 1000000,
+    "memory_stride": 64,
+    "thread_total_work": 100000000
+  },
+  "ml_workloads": {
+    "sklearn": {
+      "model": "logistic_regression",
+      "n_samples": 100000,
+      "n_features": 20,
+      "max_iter": 1000
+    },
+    "pytorch": {
+      "n_samples": 100000,
+      "n_features": 20,
+      "batch_size": 256,
+      "epochs": 5
+    },
+    "tensorflow": {
+      "n_samples": 100000,
+      "n_features": 20,
+      "batch_size": 256,
+      "epochs": 5
+    }
+  }
+}
+```
 
-Record execution time, throughput, CPU/GPU utilization, and memory usage
-Optionally include energy consumption metrics if supported by the system
+### 5. Viewing Results
 
-### 🔍 Performance Analysis
+Results are saved in the `results/` directory in structured JSON format. You can view them using any JSON viewer or directly in Python:
 
-Analyze benchmark results to determine performance bottlenecks
+```python
+{
+  "System Info": {
+	  "cpu": {
+	    "platform": "Darwin",
+	    "architecture": "arm64",
+	    "cpu": "Apple M1 Pro",
+	    "logical_cores": 10,
+	    ...
+	  }
+  }
+  "Config Metadata": { ... },
+  "Benchmark Result": {
+    "Floating Point Throughput": { "execution_time_sec": 1.232 },
+    ...
+  }
+}
+```
 
-Compare and interpret differences between platforms
+### 6. Platform Support
 
-Discuss the trade-offs in performance vs. cost, power, or scalability
+- macOS: CPU, GPU via MPS, TensorFlow-Metal
+- Linux: CPU + CUDA GPU (if available) **AMD GPU support in progress**
+- Windows: CPU + CUDA GPU (if available) **AMD GPU support tricky due to ROCm**
 
-### 📦 Deliverables:
+### 7. Contributors
 
-Benchmark Suite: All code and scripts, well-documented and runnable.
-
-Written Report: Must include methodology, benchmarking results, charts/plots, and a critical discussion of findings.
-
-Evaluation Criteria:
-
-- Technical correctness and completeness of benchmarks
-- Quality and reproducibility of experiments
-- Depth of analysis and interpretation of results
-- Clarity and structure of the written report
+[Paul Hondola]
+[Dan Ghincul]
