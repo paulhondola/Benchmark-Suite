@@ -1,4 +1,3 @@
-# --- cache_info.py ---
 import platform
 import subprocess
 

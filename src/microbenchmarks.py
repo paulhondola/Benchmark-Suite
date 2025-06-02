@@ -2,45 +2,42 @@ import time
 import random
 import numpy as np
 import os
-import json
-from datetime import datetime
 from multiprocessing import Pool
+from utils import load_config, save_results
+from hwinfo import collect_hw_info
 
-RESULTS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "results"))
-os.makedirs(RESULTS_DIR, exist_ok=True)
-
-def measure_fp_throughput(size=1000):
+def measure_fp_throughput(size):
     x = np.random.rand(size, size)
     start = time.perf_counter()
     _ = np.dot(x, x)
     end = time.perf_counter()
-    return {"execution_time_sec": round(end - start, 4)}
+    return {"execution_time_sec": round(end - start, 6)}
 
-def measure_scalar_fp_add(iterations=100_000_000):
+def measure_scalar_fp_add(iterations):
     x = 1.0
     start = time.perf_counter()
     for _ in range(iterations):
         x += 1.0
     end = time.perf_counter()
-    return {"execution_time_sec": round(end - start, 4)}
+    return {"execution_time_sec": round(end - start, 6)}
 
-def measure_memory_bandwidth(size=100_000_000):
+def measure_memory_bandwidth(size):
     a = np.random.rand(size)
     start = time.perf_counter()
     _ = a * 2
     end = time.perf_counter()
-    return {"execution_time_sec": round(end - start, 4)}
+    return {"execution_time_sec": round(end - start, 6)}
 
-def measure_memory_read_bandwidth(size=100_000_000):
+def measure_memory_read_bandwidth(size):
     a = np.random.rand(size)
     total = 0.0
     start = time.perf_counter()
     for i in range(len(a)):
         total += a[i]  # read only
     end = time.perf_counter()
-    return {"execution_time_sec": round(end - start, 4)}
+    return {"execution_time_sec": round(end - start, 6)}
 
-def measure_memory_latency(jumps=1_000_000, stride=64):
+def measure_memory_latency(jumps, stride):
     try:
         array = np.zeros(jumps * stride, dtype=np.int32)
     except MemoryError:
@@ -49,9 +46,9 @@ def measure_memory_latency(jumps=1_000_000, stride=64):
     for i in range(0, len(array), stride):
         _ = array[i]
     end = time.perf_counter()
-    return {"execution_time_sec": round(end - start, 4)}
+    return {"execution_time_sec": round(end - start, 6)}
 
-def measure_pointer_chasing_latency(size=1_000_000):
+def measure_pointer_chasing_latency(size):
     arr = list(range(size))
     random.shuffle(arr)
     next_index = arr[0]
@@ -59,7 +56,7 @@ def measure_pointer_chasing_latency(size=1_000_000):
     for _ in range(size):
         next_index = arr[next_index]
     end = time.perf_counter()
-    return {"execution_time_sec": round(end - start, 4)}
+    return {"execution_time_sec": round(end - start, 6)}
 
 def measure_cache_effectiveness():
     sizes_kb = [4, 64, 512, 2048, 8192]  # ~L1 to L3 to RAM
@@ -80,7 +77,7 @@ def dummy_workload_chunk(count):
         s += i % 3
     return s
 
-def measure_thread_scaling(max_threads=8, total_work=100_000_000):
+def measure_thread_scaling(max_threads, total_work):
     cpu_count = os.cpu_count()
     max_threads = min(max_threads, cpu_count)
     results = []
@@ -91,25 +88,35 @@ def measure_thread_scaling(max_threads=8, total_work=100_000_000):
             pool.map(dummy_workload_chunk, [work_per_thread] * threads)
         end = time.perf_counter()
         results.append((threads, round(end - start, 4)))
-    return {"cpu_count": cpu_count, "results": results}
+    return {"results": results}
 
 def run_all_microbenchmarks():
+    config = load_config()
+
+    matrix_size = config["microbenchmarks"].get("matrix_size", 1000)
+    vector_size = config["microbenchmarks"].get("vector_size", 100_000_000)
+    memory_jumps = config["microbenchmarks"].get("memory_jumps", 100_000)
+    stride = config["microbenchmarks"].get("memory_stride", 64)
+    max_threads = config["microbenchmarks"].get("max_threads", 8)
+    thread_total_work = config["microbenchmarks"].get("thread_total_work", 100_000_000)
+
     return {
-        "Floating Point Throughput": measure_fp_throughput(),
-        "Scalar FP Add Latency": measure_scalar_fp_add(),
-        "Memory Bandwidth": measure_memory_bandwidth(),
-        "Memory Read Bandwidth": measure_memory_read_bandwidth(),
-        "Memory Latency": measure_memory_latency(),
-        "Pointer Chasing Latency": measure_pointer_chasing_latency(),
-        "Cache Performance": measure_cache_effectiveness(),
-        "Thread Scalability": measure_thread_scaling()
+        "Config Metadata": config["microbenchmarks"],
+        "System Info": collect_hw_info(),
+        "Benchmark Result": {
+	        "Floating Point Throughput": measure_fp_throughput(matrix_size),
+	        "Scalar FP Add Latency": measure_scalar_fp_add(vector_size),
+	        "Memory Bandwidth": measure_memory_bandwidth(vector_size),
+	        "Memory Read Bandwidth": measure_memory_read_bandwidth(vector_size),
+	        "Memory Latency": measure_memory_latency(memory_jumps, stride),
+	        "Pointer Chasing Latency": measure_pointer_chasing_latency(vector_size),
+	        "Cache Performance": measure_cache_effectiveness(),
+	        "Thread Scalability": measure_thread_scaling(max_threads, thread_total_work)
+        }
     }
 
 if __name__ == "__main__":
-    results = run_all_microbenchmarks()
-    print("=== Microbenchmarks Finished ===")
-    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    out_path = os.path.join(RESULTS_DIR, f"microbenchmarks_{timestamp}.json")
-    with open(out_path, "w") as f:
-        json.dump(results, f, indent=2)
-    print(f"✅ Results saved to: {out_path}")
+	print("Staring Microbenchmarks")
+	results = run_all_microbenchmarks()
+	print("Microbenchmarks Finished")
+	save_results(results, "microbenchmarks")

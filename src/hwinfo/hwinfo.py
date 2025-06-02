@@ -1,8 +1,8 @@
 import json
-from cpu_info import collect_cpu_info
-from memory_info import collect_memory_info
-from cache_info import collect_cache_info
-from gpu_info import collect_gpu_info
+from .cpu_info import collect_cpu_info
+from .memory_info import collect_memory_info
+from .cache_info import collect_cache_info
+from .gpu_info import collect_gpu_info
 
 def collect_hw_info():
     return {
