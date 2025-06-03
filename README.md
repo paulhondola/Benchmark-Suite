@@ -52,45 +52,122 @@ python3 sql_benchmarks.py
 
 ### 4. Configuration
 
-Customize benchmark parameters inside the `config.json` file. This allows you to specify the parameters:
+Customize benchmark parameters inside the `config.json` file. This allows you to specify the parameters.
+
+#### 4.1 Machine Learning Benchmarks
+
+##### 4.1.1 Supported scikit-learn Models
+
+- logistic_regression
+- ridge
+- lasso
+- elasticnet
+- random_forest
+- extra_trees
+- gradient_boosting
+- svc
+- gaussian_nb
+- knn
+- mlp
+
+These are configured in config.json under the ml_workloads.sklearn.model field.
 
 ```JSON
-{
-  "microbenchmarks": {
-    "matrix_size": 1000,
-    "vector_size": 100000000,
-    "max_threads": 8,
-    "memory_jumps": 1000000,
-    "memory_stride": 64,
-    "thread_total_work": 100000000
-  },
-  "compile_benchmarks": {
-		"compile_target": "/path_to_target_project"
-	},
-  "ml_workloads": {
-    "sklearn": {
-      "model": "logistic_regression",
-      "n_samples": 100000,
-      "n_features": 20,
-      "max_iter": 1000
-    },
-    "pytorch": {
-      "n_samples": 100000,
-      "n_features": 20,
-      "batch_size": 256,
-      "epochs": 5
-    },
-    "tensorflow": {
-      "n_samples": 100000,
-      "n_features": 20,
-      "batch_size": 256,
-      "epochs": 5
-    }
-  },
-  "sql_benchmarks": {
-  	"row_count": 100000,
+"sklearn": {
+    "model": "logistic_regression",
+    "n_samples": 100000,
+    "n_features": 20,
+    "max_iter": 1000
+}
+```
+
+#### 4.1.2 PyTorch Benchmark
+
+Runs on CPU and GPU (if available)
+
+Uses a simple feedforward neural network with configurable batch_size, iterations, and data size
+
+Automatically uses Metal backend (mps) on macOS
+
+```JSON
+"pytorch": {
+    "n_samples": 100000,
+    "n_features": 20,
+    "batch_size": 256,
+    "epochs": 5
+}
+```
+
+#### 4.1.3 TensorFlow Benchmark
+
+Executes on both CPU and GPU (if available)
+
+Benchmarks include training time, inference time, and accuracy
+
+```JSON
+"tensorflow": {
+    "n_samples": 100000,
+    "n_features": 20,
+    "batch_size": 256,
+    "epochs": 5
+}
+```
+
+#### 4.2 Sorting Benchmarks
+
+Sorting benchmarks include:
+
+- NumPy: `numpy.sort()`
+- Pandas: `pandas.DataFrame.sort_values()`
+
+```JSON
+"sorting_benchmarks": {
+	"numpy_array_size": 10000000,
+	"pandas_dataframe_size": 1000000
+}
+```
+
+#### 4.3 Compilation Benchmarks
+
+Compilation benchmarks compare GCC and Clang performance on a simple C project.
+
+```JSON
+"compile_benchmarks": {
+	"compile_target": "/Users/paulhondola/GitHub/CN Project/sqlite"
+}
+```
+
+#### 4.4 Microbenchmarks
+
+Microbenchmarks include:
+
+- Memory throughput
+- Memory latency
+- Floating point performance
+- Cache performance
+- Thread scaling
+
+```JSON
+"microbenchmarks": {
+	"matrix_size": 10,
+	"vector_size": 1000000,
+	"max_threads": 8,
+	"memory_jumps": 10000,
+	"memory_stride": 64,
+	"thread_total_work": 1000000
+}
+```
+
+#### 4.5 SQL Benchmarks
+
+#### TODO
+
+SQL benchmarks test SQLite and PostgreSQL performance on a simple database schema.
+
+```JSON
+"sql_benchmarks": {
+	"row_count": 100000,
 	"threshold": 50000
-  }
 }
 ```
 
