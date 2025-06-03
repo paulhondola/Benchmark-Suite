@@ -4,9 +4,6 @@ from hwinfo.hwinfo import collect_hw_info
 import time
 import numpy as np
 import pandas as pd
-import json
-import os
-from datetime import datetime
 
 def sort_numpy_array(size):
     arr = np.random.rand(size)

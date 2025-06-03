@@ -1,11 +1,12 @@
+psutil
+py-cpuinfo
+matplotlib
 numpy
 pandas
 scikit-learn
 torch
 tensorflow
-matplotlib
-psutil
-py-cpuinfo
+sqlalchemy
 
 [:platform_system == "Darwin"]
 tensorflow-macos

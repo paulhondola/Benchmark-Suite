@@ -3,16 +3,22 @@ requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 [project]
 dependencies = [
+	# metrics
+	"psutil",
+	"py-cpuinfo",
+	# plotting
+	"matplotlib",
+	# sorting and microbenchmarks
 	"numpy",
 	"pandas",
+	# machine learning
 	"scikit-learn",
 	"torch",
 	"tensorflow",
 	"tensorflow-macos; platform_system == 'Darwin'",
 	"tensorflow-metal; platform_system == 'Darwin'",
-	"matplotlib",
-	"psutil",
-	"py-cpuinfo",
+	# database
+	"sqlalchemy",
 ]
 name = "benchmark-suite"
 authors = [
