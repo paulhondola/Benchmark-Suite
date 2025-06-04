@@ -1,0 +1,74 @@
+{
+  "Config Metadata": {
+    "model": "sklearn",
+    "sklearn": {
+      "model": "random_forest",
+      "n_samples": 5000,
+      "n_features": 20,
+      "max_iter": 100
+    },
+    "pytorch": {
+      "n_samples": 5000,
+      "n_features": 100,
+      "batch_size": 64,
+      "epochs": 10
+    },
+    "tensorflow": {
+      "n_samples": 1000,
+      "n_features": 20,
+      "batch_size": 32,
+      "epochs": 10
+    }
+  },
+  "Benchmark Results": {
+    "Training Time (s)": 0.7832,
+    "Inference Time (s)": 0.0084,
+    "Accuracy": 0.898
+  },
+  "Hardware Metrics:": {
+    "CPU Time (s)": 0.7939892479999999,
+    "Memory Usage (MB)": 8528.0
+  },
+  "System Info": {
+    "cpu": {
+      "platform": "Darwin",
+      "architecture": "arm64",
+      "cpu": "Apple M1 Pro",
+      "logical_cores": 10,
+      "physical_cores": 10,
+      "cpu_freq_mhz": 3228,
+      "cpu_freq_per_core_mhz": "Unavailable on this platform",
+      "cpu_usage_percent_total": 17.4,
+      "cpu_usage_per_core_percent": [
+        41.4,
+        39.4,
+        30.0,
+        27.0,
+        18.0,
+        12.1,
+        5.1,
+        1.0,
+        0.0,
+        0.0
+      ]
+    },
+    "gpu:": {
+      "error": "Cannot run `powermetrics`. Try running with sudo or grant Full Disk Access."
+    },
+    "memory": {
+      "ram_total_gb": 16.0,
+      "ram_used_gb": 6.71,
+      "ram_free_gb": 4.68,
+      "ram_usage_percent": 70.8
+    },
+    "cache": {
+      "platform": "Darwin",
+      "cache_info": {
+        "L1 Data Cache": 65536,
+        "L1 Instruction Cache": 131072,
+        "L2 Cache": 4194304,
+        "L3 Cache": null
+      }
+    }
+  }
+}

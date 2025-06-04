@@ -1,0 +1,132 @@
+{
+  "Config Metadata": {
+    "matrix_size": 10,
+    "vector_size": 1000000,
+    "max_threads": 8,
+    "memory_jumps": 10000,
+    "memory_stride": 64,
+    "thread_total_work": 1000000
+  },
+  "Benchmark Results": {
+    "Floating Point Throughput": {
+      "execution_time_sec": 7e-06
+    },
+    "Scalar FP Add Latency": {
+      "execution_time_sec": 0.022283
+    },
+    "Memory Bandwidth": {
+      "execution_time_sec": 0.000925
+    },
+    "Memory Read Bandwidth": {
+      "execution_time_sec": 0.074664
+    },
+    "Memory Latency": {
+      "execution_time_sec": 0.000512
+    },
+    "Pointer Chasing Latency": {
+      "execution_time_sec": 0.105734
+    },
+    "Cache Performance": {
+      "results": [
+        [
+          4,
+          1.1e-05
+        ],
+        [
+          64,
+          5.4e-05
+        ],
+        [
+          512,
+          0.000431
+        ],
+        [
+          2048,
+          0.001709
+        ],
+        [
+          8192,
+          0.006924
+        ]
+      ]
+    },
+    "Thread Scalability": {
+      "results": [
+        [
+          1,
+          0.1333
+        ],
+        [
+          2,
+          0.1181
+        ],
+        [
+          3,
+          0.1102
+        ],
+        [
+          4,
+          0.1093
+        ],
+        [
+          5,
+          0.1099
+        ],
+        [
+          6,
+          0.1112
+        ],
+        [
+          7,
+          0.1122
+        ],
+        [
+          8,
+          0.1212
+        ]
+      ]
+    }
+  },
+  "System Info": {
+    "cpu": {
+      "platform": "Darwin",
+      "architecture": "arm64",
+      "cpu": "Apple M1 Pro",
+      "logical_cores": 10,
+      "physical_cores": 10,
+      "cpu_freq_mhz": 3228,
+      "cpu_freq_per_core_mhz": "Unavailable on this platform",
+      "cpu_usage_percent_total": 8.0,
+      "cpu_usage_per_core_percent": [
+        34.0,
+        34.0,
+        5.0,
+        3.0,
+        1.0,
+        2.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ]
+    },
+    "gpu:": {
+      "error": "Cannot run `powermetrics`. Try running with sudo or grant Full Disk Access."
+    },
+    "memory": {
+      "ram_total_gb": 16.0,
+      "ram_used_gb": 6.85,
+      "ram_free_gb": 5.27,
+      "ram_usage_percent": 67.1
+    },
+    "cache": {
+      "platform": "Darwin",
+      "cache_info": {
+        "L1 Data Cache": 65536,
+        "L1 Instruction Cache": 131072,
+        "L2 Cache": 4194304,
+        "L3 Cache": null
+      }
+    }
+  }
+}

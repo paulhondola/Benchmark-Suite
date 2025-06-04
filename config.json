@@ -12,9 +12,10 @@
 		"pandas_dataframe_size": 1000000
 	},
 	"compile_benchmarks": {
-		"compile_target": "/Users/paulhondola/GitHub/CN Project/sqlite"
+		"compile_target": "/Users/paulhondola/GitHub/sqlite"
 	},
 	"ml_workloads": {
+		"model": "sklearn",
 		"sklearn": {
 			"model": "random_forest",
 			"n_samples": 5000,

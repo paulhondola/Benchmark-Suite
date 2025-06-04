@@ -20,7 +20,9 @@ src/hwinfo/hwinfo.py
 src/hwinfo/memory_info.py
 src/utils/__init__.py
 src/utils/config_loader.py
-src/utils/metrics.py
+src/utils/cpu_time.py
+src/utils/memory_usage.py
 src/utils/plotting.py
 src/utils/profiler.py
 src/utils/result_saver.py
+src/utils/run_test.py

@@ -1,0 +1,59 @@
+{
+  "Config Metadata": {
+    "compile_target": "/Users/paulhondola/GitHub/sqlite"
+  },
+  "Benchmark Results": {
+    "gcc": {
+      "execution_time_sec": 8.874619,
+      "avg_cpu_percent": 19.4,
+      "memory_delta_MB": 0.03
+    },
+    "clang": {
+      "execution_time_sec": 8.807249,
+      "avg_cpu_percent": 27.7,
+      "memory_delta_MB": 0.02
+    }
+  },
+  "System Info": {
+    "cpu": {
+      "platform": "Darwin",
+      "architecture": "arm64",
+      "cpu": "Apple M1 Pro",
+      "logical_cores": 10,
+      "physical_cores": 10,
+      "cpu_freq_mhz": 3228,
+      "cpu_freq_per_core_mhz": "Unavailable on this platform",
+      "cpu_usage_percent_total": 14.8,
+      "cpu_usage_per_core_percent": [
+        32.4,
+        34.0,
+        16.2,
+        14.9,
+        11.0,
+        6.9,
+        9.9,
+        8.0,
+        7.8,
+        6.9
+      ]
+    },
+    "gpu:": {
+      "error": "Cannot run `powermetrics`. Try running with sudo or grant Full Disk Access."
+    },
+    "memory": {
+      "ram_total_gb": 16.0,
+      "ram_used_gb": 6.72,
+      "ram_free_gb": 4.78,
+      "ram_usage_percent": 70.1
+    },
+    "cache": {
+      "platform": "Darwin",
+      "cache_info": {
+        "L1 Data Cache": 65536,
+        "L1 Instruction Cache": 131072,
+        "L2 Cache": 4194304,
+        "L3 Cache": null
+      }
+    }
+  }
+}

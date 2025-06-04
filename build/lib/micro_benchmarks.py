@@ -1,6 +1,5 @@
-from utils.config_loader import load_config
-from utils.result_saver import save_results
-from hwinfo.hwinfo import collect_hw_info
+from utils import load_config, save_results
+from hwinfo import collect_hw_info
 import time
 import random
 import numpy as np

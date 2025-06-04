@@ -1,6 +1,5 @@
-from utils.config_loader import load_config
-from utils.result_saver import save_results
-from hwinfo.hwinfo import collect_hw_info
+from utils import load_config, save_results
+from hwinfo import collect_hw_info, get_cpu_time, get_memory_usage
 import os
 import time
 import psutil
@@ -10,9 +9,11 @@ def benchmark_compile(build_cmd, env=None, label="", path=None):
     print(f"Running build command: {build_cmd}")
 
     process = psutil.Process()
-    mem_before = process.memory_info().rss
 
+    memory_before = get_memory_usage()
+    cpu_time_before = get_cpu_time()
     start = time.perf_counter()
+
     try:
         subprocess.run(build_cmd, shell=True, check=True, env=env, cwd=path)
     except subprocess.CalledProcessError as e:
@@ -20,14 +21,22 @@ def benchmark_compile(build_cmd, env=None, label="", path=None):
         return {"error": str(e)}
     end = time.perf_counter()
 
-    duration = end - start
-    cpu_percent = psutil.cpu_percent(interval=None)
-    mem_after = process.memory_info().rss
+    cpu_time_after = get_cpu_time()
+    memory_after = get_memory_usage()
+
+    cpu_percent = process.cpu_percent(interval=None)
+
+    exec_time = end - start
 
     return {
-        "execution_time_sec": round(duration, 6),
-        "avg_cpu_percent": round(cpu_percent, 1),
-        "memory_delta_MB": round((mem_after - mem_before) / (1024**2), 2)
+        "Benchmark Results": {
+            "Execution Time (sec)": exec_time,
+            "CPU Usage (%)": round(cpu_percent, 1)
+        },
+        "Hardware Metrics": {
+            "CPU Time (s)": cpu_time_after - cpu_time_before,
+            "Memory Usage (MB)": memory_after - memory_before
+        }
     }
 
 def run_compile_benchmarks(config):

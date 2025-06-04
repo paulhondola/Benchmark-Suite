@@ -1,0 +1,183 @@
+{
+  "Config Metadata": {
+    "matrix_size": 10,
+    "vector_size": 1000000,
+    "max_threads": 8,
+    "memory_jumps": 10000,
+    "memory_stride": 64,
+    "thread_total_work": 1000000
+  },
+  "Benchmark Results": {
+    "Floating Point Throughput": {
+      "Benchmark Results": {
+        "Floating Point Operations (FLOPs)": 2000,
+        "FLOPS": 250000000.0,
+        "Execution Time (sec)": 8e-06
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 2.8e-05,
+        "Memory Usage (MB)": 0.0
+      }
+    },
+    "Scalar FP Add Latency": {
+      "Benchmark Results": {
+        "Floating Point Operations (FLOPs)": 1000000,
+        "FLOPS": 43930940.56143742,
+        "Execution Time (sec)": 0.022763
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 0.022795,
+        "Memory Usage (MB)": 0.0
+      }
+    },
+    "Memory Bandwidth": {
+      "Benchmark Results": {
+        "Memory Bandwidth (bytes/sec)": 9925558312.655087,
+        "Memory Bandwidth (GB/sec)": 9.243896522238,
+        "Execution Time (sec)": 0.000806
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 0.000864,
+        "Memory Usage (MB)": 7824.0
+      }
+    },
+    "Memory Latency": {
+      "Benchmark Results": {
+        "Memory Latency (nanosec)": 0.8015625,
+        "Execution Time (sec)": 0.000513
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 0.00053,
+        "Memory Usage (MB)": 0.0
+      }
+    },
+    "Pointer Chasing Latency": {
+      "Benchmark Results": {
+        "Pointer Chasing Latency (nanosec)": 130.339,
+        "Execution Time (sec)": 0.130339
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 0.130334,
+        "Memory Usage (MB)": 0.0
+      }
+    },
+    "Cache Performance": {
+      "Benchmark Results": {
+        "Cache Effectiveness Results": [
+          {
+            "cache_size_kb": 4,
+            "execution_time_sec": 1e-05
+          },
+          {
+            "cache_size_kb": 64,
+            "execution_time_sec": 5.4e-05
+          },
+          {
+            "cache_size_kb": 512,
+            "execution_time_sec": 0.000425
+          },
+          {
+            "cache_size_kb": 2048,
+            "execution_time_sec": 0.001701
+          },
+          {
+            "cache_size_kb": 8192,
+            "execution_time_sec": 0.006829
+          }
+        ],
+        "CPU Time (s)": 0.009925,
+        "Memory Usage (MB)": 0.01
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 0.009925,
+        "Memory Usage (MB)": 0.01
+      }
+    },
+    "Thread Scalability": {
+      "Benchmark Results": {
+        "Thread Scalability Results": [
+          {
+            "threads": 1,
+            "execution_time_sec": 0.1388
+          },
+          {
+            "threads": 2,
+            "execution_time_sec": 0.1171
+          },
+          {
+            "threads": 3,
+            "execution_time_sec": 0.1263
+          },
+          {
+            "threads": 4,
+            "execution_time_sec": 0.1219
+          },
+          {
+            "threads": 5,
+            "execution_time_sec": 0.1203
+          },
+          {
+            "threads": 6,
+            "execution_time_sec": 0.1116
+          },
+          {
+            "threads": 7,
+            "execution_time_sec": 0.1128
+          },
+          {
+            "threads": 8,
+            "execution_time_sec": 0.1164
+          }
+        ],
+        "CPU Time (s)": 0.079094,
+        "Memory Usage (MB)": 0.0
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 0.079094,
+        "Memory Usage (MB)": 0.0
+      }
+    }
+  },
+  "System Info": {
+    "cpu": {
+      "platform": "Darwin",
+      "architecture": "arm64",
+      "cpu": "Apple M1 Pro",
+      "logical_cores": 10,
+      "physical_cores": 10,
+      "cpu_freq_mhz": 3228,
+      "cpu_freq_per_core_mhz": "Unavailable on this platform",
+      "cpu_usage_percent_total": 10.8,
+      "cpu_usage_per_core_percent": [
+        28.3,
+        26.0,
+        20.0,
+        15.0,
+        10.0,
+        4.1,
+        3.0,
+        1.0,
+        0.0,
+        1.0
+      ]
+    },
+    "gpu:": {
+      "error": "Cannot run `powermetrics`. Try running with sudo or grant Full Disk Access."
+    },
+    "memory": {
+      "ram_total_gb": 16.0,
+      "ram_used_gb": 6.53,
+      "ram_free_gb": 4.93,
+      "ram_usage_percent": 69.2
+    },
+    "cache": {
+      "platform": "Darwin",
+      "cache_info": {
+        "L1 Data Cache": 65536,
+        "L1 Instruction Cache": 131072,
+        "L2 Cache": 4194304,
+        "L3 Cache": null
+      }
+    }
+  }
+}
