@@ -3,6 +3,9 @@ compile_benchmarks
 hwinfo
 micro_benchmarks
 ml_workloads
+run_pytorch
+run_sklearn
+run_tensorflow
 sorting_benchmarks
 sql_benchmarks
 utils
