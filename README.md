@@ -129,11 +129,11 @@ Sorting benchmarks include:
 
 #### 4.3 Compilation Benchmarks
 
-Compilation benchmarks compare GCC and Clang performance on a simple C project.
+Compilation benchmarks compare GCC and Clang performance on a simple C project. (e.g. sqlite)
 
 ```JSON
 "compile_benchmarks": {
-	"compile_target": "/Users/paulhondola/GitHub/CN Project/sqlite"
+	"compile_target": "<path to testing repo>"
 }
 ```
 
