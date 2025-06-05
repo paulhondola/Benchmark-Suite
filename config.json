@@ -36,7 +36,7 @@
 		}
 	},
 	"sql_benchmarks": {
-		"row_count": 100000,
-		"threshold": 50000
+		"row_count": 10000000,
+		"threshold": 5000000
 	}
 }

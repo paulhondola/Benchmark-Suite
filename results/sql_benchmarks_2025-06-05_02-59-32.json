@@ -1,0 +1,96 @@
+{
+  "Config Metadata": {
+    "row_count": 10000000,
+    "threshold": 5000000
+  },
+  "Benchmark Results": {
+    "simple_query": {
+      "Benchmark Results": {
+        "Execution Time (sec)": 0.284379,
+        "CPU Time (s)": 0.296875,
+        "Memory Usage (MB)": 2196.0
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 0.296875,
+        "Memory Usage (MB)": 2196.0
+      }
+    },
+    "insert_benchmark": {
+      "Benchmark Results": {
+        "Execution Time (sec)": 7.264582,
+        "CPU Time (s)": 7.25,
+        "Memory Usage (MB)": 224992.0
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 7.25,
+        "Memory Usage (MB)": 224992.0
+      }
+    },
+    "update_benchmark": {
+      "Benchmark Results": {
+        "Execution Time (sec)": 0.597109,
+        "CPU Time (s)": 0.59375,
+        "Memory Usage (MB)": 3488.0
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 0.59375,
+        "Memory Usage (MB)": 3488.0
+      }
+    },
+    "delete_benchmark": {
+      "Benchmark Results": {
+        "Execution Time (sec)": 0.613361,
+        "CPU Time (s)": 0.625,
+        "Memory Usage (MB)": 268.0
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 0.625,
+        "Memory Usage (MB)": 268.0
+      }
+    }
+  },
+  "System Info": {
+    "cpu": {
+      "platform": "Windows",
+      "architecture": "AMD64",
+      "cpu": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+      "logical_cores": 12,
+      "physical_cores": 6,
+      "cpu_freq_mhz": 3301.0,
+      "cpu_freq_per_core_mhz": "Unavailable on this platform",
+      "cpu_usage_percent_total": 3.3,
+      "cpu_usage_per_core_percent": [
+        7.6,
+        1.6,
+        1.5,
+        6.2,
+        1.6,
+        0.0,
+        1.6,
+        1.6,
+        0.0,
+        4.6,
+        1.6,
+        11.8
+      ]
+    },
+    "gpu:": {
+      "error": "Cannot run `powermetrics`. Try running with sudo or grant Full Disk Access."
+    },
+    "memory": {
+      "ram_total_gb": 13.69,
+      "ram_used_gb": 11.27,
+      "ram_free_gb": 2.43,
+      "ram_usage_percent": 82.3
+    },
+    "cache": {
+      "platform": "Windows",
+      "cache_info": {
+        "L2 Cache": 3145728,
+        "L3 Cache": 16777216
+      },
+      "cpu_brand": "AMD Ryzen 5 7535HS with Radeon Graphics",
+      "arch": "X86_64"
+    }
+  }
+}
