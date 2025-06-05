@@ -7,9 +7,9 @@ scikit-learn
 torch
 sqlalchemy
 
-[:platform_system == "Darwin"]
+[macos]
 tensorflow-macos
 tensorflow-metal
 
-[:platform_system == "Windows"]
+[windows]
 tensorflow
