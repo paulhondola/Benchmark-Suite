@@ -24,10 +24,16 @@ cd benchmark-suite
 
 ### 2. Install Dependencies
 
-Make sure you have Python 3.8+ installed. Then install dependencies using pyproject.toml:
+Make sure you have Python 3.8+ installed. Then install dependencies using pyproject.toml.
 
-```python
-pip install .
+For platform-specific machine learning backends, use:
+
+```bash
+# On Windows:
+pip install .[windows]
+
+# On macOS:
+pip install .[macos]
 ```
 
 **Note: On macOS, Metal support for TensorFlow will be automatically installed via conditional requirements.**
@@ -200,7 +206,77 @@ Results are saved in the `results/` directory in structured JSON format. You can
 - Linux: CPU + CUDA GPU (if available) **AMD GPU support in progress**
 - Windows: CPU + CUDA GPU (if available) **AMD GPU support tricky due to ROCm**
 
-### 7. Authors
+### 7. Tested Platforms
+
+The benchmark suite has been tested and validated on the following hardware and operating system configurations:
+
+💻 MacBook Pro (Apple M1 Pro)
+
+- OS: macOS Sequoia 15
+- CPU: Apple M1 Pro (10-core)
+- GPU: Integrated 16-core GPU
+- Benchmarks Tested:
+- ✅ Microbenchmarks (FP, memory, cache)
+- ✅ Machine Learning (TensorFlow-metal, PyTorch MPS, scikit-learn)
+- ✅ Sorting Benchmarks (NumPy, Pandas)
+- ✅ SQL Benchmarks (SQLite only)
+- ✅ Compilation Benchmarks (GCC, Clang)
+
+🖥️ Lenovo IdeaPad Gaming
+
+- OS: Windows 10 Home
+- CPU: AMD Ryzen 5 7535HS with Radeon Graphics (6-core / 12-thread)
+- GPU: Integrated AMD Radeon Graphics
+- Benchmarks Tested:
+- ✅ Microbenchmarks (FP, memory, cache)
+- ✅ Machine Learning (CPU-only PyTorch, scikit-learn, CPU-only TensorFlow)
+- ✅ Sorting Benchmarks (NumPy, Pandas)
+- ✅ SQL Benchmarks (SQLite, PostgreSQL via psycopg2)
+- ✅ Compilation Benchmarks (GCC/Clang via WSL)
+
+🐧 MacBook Pro (M1 Pro) — Asahi Linux
+
+- OS: Asahi Linux (Arch-based)
+- CPU: Apple M1 Pro (10-core)
+- GPU: Currently no GPU acceleration (as of kernel 6.8+)
+- Benchmarks Tested:
+- ✅ Microbenchmarks (FP, memory, cache)
+- ✅ Machine Learning (scikit-learn, PyTorch CPU) # No TensorFlow support yet
+- ✅ Sorting Benchmarks (NumPy, Pandas)
+- ✅ SQL Benchmarks (SQLite)
+- ✅ Compilation Benchmarks (GCC)
+
+📦 Docker (Planned Testing)
+
+- Target: Cross-platform container-based benchmarking
+- Goals:
+    - Run SQL benchmarks inside isolated PostgreSQL containers
+    - Standardize system metrics across environments
+    - Validate portability of benchmarks in headless/server setups
+- Status: Docker setup integrated, full test suite validation in progress
+
+### 8. Limitations
+
+While the benchmark suite runs across a wide range of platforms, the following limitations currently apply:
+
+- macOS (M1/M2/M3 with MPS GPU acceleration):
+
+    - Although supported, MPS (Metal Performance Shaders) acceleration in TensorFlow and PyTorch is often slower than CPU for small to medium workloads due to higher launch latency and memory copy overhead.
+    - TensorFlow GPU (via tensorflow-metal) may underperform compared to native CPU execution in practical scenarios.
+
+- Windows (AMD Ryzen with integrated graphics):
+    - No GPU acceleration available for PyTorch or TensorFlow.
+    - AMD GPUs are not supported for machine learning workloads on Windows due to lack of ROCm and DirectML integration in major ML frameworks.
+    - Only CPU-based training/inference is available.
+- Asahi Linux (aarch64 architecture):
+    - TensorFlow is not officially supported on aarch64 Linux (including Asahi).
+    - No GPU acceleration is available — machine learning benchmarks run solely on CPU.
+    - PyTorch works in CPU mode, and some libraries may need to be built from source or replaced with alternatives.
+- Docker (planned support):
+    - GPU passthrough and acceleration support inside containers is limited and hardware-dependent.
+    - Benchmarks run in Docker may vary slightly in performance due to container overhead and shared host resources.
+
+### 9. Authors
 
 [Paul Hondola][paulhondola@gmail.com]
 
