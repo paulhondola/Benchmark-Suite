@@ -246,6 +246,20 @@ The benchmark suite has been tested and validated on the following hardware and 
 - ✅ SQL Benchmarks (SQLite)
 - ✅ Compilation Benchmarks (GCC)
 
+🪟 Windows 11 ARM64 (Virtual Machine)
+
+- OS: Windows 11 ARM64 (Hyper-V VM)
+- CPU: Apple M1 Pro (emulated)
+- GPU: None (no GPU passthrough)
+- Benchmarks Tested:
+    - ✅ Microbenchmarks (FP, memory, cache)
+    - ✅ Machine Learning:
+    - ✅ PyTorch and ✅ scikit-learn — both work on Windows ARM64
+    - ❌ TensorFlow — not supported on Windows ARM64
+    - ✅ Sorting Benchmarks (NumPy, Pandas)
+    - ✅ SQL Benchmarks (SQLite)
+    - ✅ Compilation Benchmarks (Clang)
+
 📦 Docker (Planned Testing)
 
 - Target: Cross-platform container-based benchmarking
@@ -265,6 +279,7 @@ While the benchmark suite runs across a wide range of platforms, the following l
     - TensorFlow GPU (via tensorflow-metal) may underperform compared to native CPU execution in practical scenarios.
 
 - Windows (AMD Ryzen with integrated graphics):
+    - On Windows ARM64, TensorFlow is not supported — no official PyPI wheels are available for this architecture. Installation will fail unless done through Conda or custom builds.
     - No GPU acceleration available for PyTorch or TensorFlow.
     - AMD GPUs are not supported for machine learning workloads on Windows due to lack of ROCm and DirectML integration in major ML frameworks.
     - Only CPU-based training/inference is available.

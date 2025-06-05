@@ -27,5 +27,5 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-windows = ["tensorflow"]
-macos = ["tensorflow-macos", "tensorflow-metal"]
+windows = ["tensorflow"]                         # no ARM support
+macos = ["tensorflow-macos", "tensorflow-metal"] # defaults to MPS
