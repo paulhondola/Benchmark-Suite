@@ -8,7 +8,7 @@ A cross-platform benchmarking suite designed to evaluate CPU, GPU, memory, and c
 - Machine Learning workloads: PyTorch (CPU/GPU), scikit-learn, TensorFlow (macOS GPU via MPS)
 - Sort operations / Dot Product (NumPy, Pandas)
 - Compilation benchmarks (GCC vs Clang)
-- SQL database performance (SQLite, PostgreSQL)
+- SQL database performance (SQLite)
 - Automatic system metadata collection (CPU, memory, cache, GPU)
 - Configuration through JSON file
 - Results saved in structured JSON with metadata
