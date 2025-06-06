@@ -227,7 +227,7 @@ The benchmark suite has been tested and validated on the following hardware and 
 - Issues:
 
     - TensorFlow not supported for AMD GPUs on Windows (no ROCm support)
-    - PyTorch works in CPU mode
+    - PyTorch works only in CPU mode
 
 🐧 MacBook Pro (M1 Pro) — Asahi Linux
 
