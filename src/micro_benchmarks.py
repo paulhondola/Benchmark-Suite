@@ -352,6 +352,5 @@ def run_microbenchmarks(config):
 
 if __name__ == "__main__":
 	config = load_config()
-	print("Starting Micro Benchmarks")
+	print("Starting Micro Benchmarks...")
 	run_microbenchmarks(config["microbenchmarks"])
-	print("Micro Benchmarks Finished")

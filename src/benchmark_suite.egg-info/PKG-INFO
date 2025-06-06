@@ -260,68 +260,52 @@ The benchmark suite has been tested and validated on the following hardware and 
 - OS: macOS Sequoia 15
 - CPU: Apple M1 Pro (10-core)
 - GPU: Integrated 16-core GPU
-- Benchmarks Tested:
-- ✅ Microbenchmarks (FP, memory, cache)
-- ✅ Machine Learning (TensorFlow-metal, PyTorch MPS, scikit-learn)
-- ✅ Sorting Benchmarks (NumPy, Pandas)
-- ✅ SQL Benchmarks (SQLite only)
-- ✅ Compilation Benchmarks (GCC, Clang)
+- Issues:
+
+    - MPS (Metal Performance Shaders) acceleration works for PyTorch and TensorFlow, but performance may vary based on workload size, especially for small to medium tasks where the CPU may outperform GPU due to higher launch latency and memory copy overhead.
 
 🖥️ Lenovo IdeaPad Gaming
 
 - OS: Windows 10 Home
 - CPU: AMD Ryzen 5 7535HS with Radeon Graphics (6-core / 12-thread)
 - GPU: Integrated AMD Radeon Graphics
-- Benchmarks Tested:
-- ✅ Microbenchmarks (FP, memory, cache)
-- ✅ Machine Learning (CPU-only PyTorch, scikit-learn, CPU-only TensorFlow)
-- ✅ Sorting Benchmarks (NumPy, Pandas)
-- ✅ SQL Benchmarks (SQLite, PostgreSQL via psycopg2)
-- ✅ Compilation Benchmarks (GCC/Clang via WSL)
+- Issues:
+
+    - TensorFlow not supported for AMD GPUs on Windows (no ROCm support)
+    - PyTorch works in CPU mode
 
 🐧 MacBook Pro (M1 Pro) — Asahi Linux
 
-- OS: Asahi Linux (Arch-based)
+- OS: Asahi Linux (Fedora-based) (kernel 6.8+, native aarch64)
 - CPU: Apple M1 Pro (10-core)
 - GPU: Currently no GPU acceleration (as of kernel 6.8+)
-- Benchmarks Tested:
-- ✅ Microbenchmarks (FP, memory, cache)
-- ✅ Machine Learning (scikit-learn, PyTorch CPU) # No TensorFlow support yet
-- ✅ Sorting Benchmarks (NumPy, Pandas)
-- ✅ SQL Benchmarks (SQLite)
-- ✅ Compilation Benchmarks (GCC)
+- Issues:
 
-📦 Docker (Planned Testing)
+    - No GPU acceleration available
+    - TensorFlow not supported (no official builds for aarch64)
 
-- Target: Cross-platform container-based benchmarking
-- Goals:
-    - Run SQL benchmarks inside isolated PostgreSQL containers
-    - Standardize system metrics across environments
-    - Validate portability of benchmarks in headless/server setups
-- Status: Docker setup integrated, full test suite validation in progress
+🪟 Windows 11 ARM64 (Virtual Machine)
 
-### 8. Limitations
+- OS: Windows 11 ARM64 (Hyper-V VM)
+- CPU: Apple M1 Pro (emulated)
+- GPU: None (no GPU passthrough)
+- Issues:
 
-While the benchmark suite runs across a wide range of platforms, the following limitations currently apply:
+    - No GPU acceleration available for PyTorch or TensorFlow
+    - TensorFlow not supported (no official PyPI wheels for ARM64)
 
-- macOS (M1/M2/M3 with MPS GPU acceleration):
+📦 Docker Container (python:3.12-slim)
 
-    - Although supported, MPS (Metal Performance Shaders) acceleration in TensorFlow and PyTorch is often slower than CPU for small to medium workloads due to higher launch latency and memory copy overhead.
-    - TensorFlow GPU (via tensorflow-metal) may underperform compared to native CPU execution in practical scenarios.
+- OS: Debian-based (Python 3.12-slim) aarch64
+- CPU: Emulated ARM64 (depends on host)
+- GPU: None (no GPU passthrough)
+- Issues:
 
-- Windows (AMD Ryzen with integrated graphics):
-    - No GPU acceleration available for PyTorch or TensorFlow.
-    - AMD GPUs are not supported for machine learning workloads on Windows due to lack of ROCm and DirectML integration in major ML frameworks.
-    - Only CPU-based training/inference is available.
-- Asahi Linux (aarch64 architecture):
-    - TensorFlow is not officially supported on aarch64 Linux (including Asahi).
-    - No GPU acceleration is available — machine learning benchmarks run solely on CPU.
-    - PyTorch works in CPU mode, and some libraries may need to be built from source or replaced with alternatives.
-- Docker (planned support):
-    - GPU passthrough and acceleration support inside containers is limited and hardware-dependent.
-    - Benchmarks run in Docker may vary slightly in performance due to container overhead and shared host resources.
+    - Compilation testing tricky due to Docker environment
+    - No GPU acceleration available
+    - TensorFlow not supported (no official PyPI wheels for ARM64)
 
-### 9. Authors
+### 8. Authors
 
 [Paul Hondola][paulhondola@gmail.com]
 

@@ -120,6 +120,5 @@ def run_sorting_benchmarks(config):
 
 if __name__ == "__main__":
 	config = load_config()
-	print("Starting Sorting Benchmarks")
+	print("Starting Sorting Benchmarks...")
 	run_sorting_benchmarks(config["sorting_benchmarks"])
-	print("Sorting Benchmarks Finished")

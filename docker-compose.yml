@@ -1,0 +1,42 @@
+services:
+    micro:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: benchmark_micro
+        volumes:
+            - ./results:/app/results
+        working_dir: /app
+        command: python src/micro_benchmarks.py
+
+    ml:
+        build: .
+        container_name: benchmark_ml
+        volumes:
+            - ./results:/app/results
+        working_dir: /app
+        command: python src/ml_workloads.py
+
+    sql:
+        build: .
+        container_name: benchmark_sql
+        volumes:
+            - ./results:/app/results
+        working_dir: /app
+        command: python src/sql_benchmarks.py
+
+    sorting:
+        build: .
+        container_name: benchmark_sorting
+        volumes:
+            - ./results:/app/results
+        working_dir: /app
+        command: python src/sorting_benchmarks.py
+
+    compile:
+        build: .
+        container_name: benchmark_compile
+        volumes:
+            - ./results:/app/results
+        working_dir: /app
+        command: python src/compile_benchmarks.py

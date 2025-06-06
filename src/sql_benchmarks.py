@@ -185,6 +185,5 @@ def run_sql_benchmarks(config):
 
 if __name__ == "__main__":
     config = load_config()
-    print("Starting SQL Benchmarks")
+    print("Starting SQL Benchmarks...")
     run_sql_benchmarks(config["sql_benchmarks"])
-    print("SQL Benchmarks Finished")

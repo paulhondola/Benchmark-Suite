@@ -1,0 +1,64 @@
+{
+  "Config Metadata": {
+    "numpy_array_size": 10000000,
+    "pandas_dataframe_size": 1000000
+  },
+  "Benchmark Results": {
+    "numpy_sort": {
+      "Benchmark Results": {
+        "Execution Time (sec)": 0.3495
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 0.35,
+        "Memory Usage (MB)": 0.0
+      }
+    },
+    "pandas_sort": {
+      "Benchmark Results": {
+        "Execution Time (sec)": 0.1178
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 0.12,
+        "Memory Usage (MB)": 0.0
+      }
+    }
+  },
+  "System Info": {
+    "cpu": {
+      "platform": "Linux",
+      "architecture": "aarch64",
+      "cpu": "",
+      "logical_cores": 10,
+      "physical_cores": 10,
+      "cpu_freq_mhz": null,
+      "cpu_freq_per_core_mhz": "Unavailable on this platform",
+      "cpu_usage_percent_total": 25.1,
+      "cpu_usage_per_core_percent": [
+        8.7,
+        10.1,
+        2.9,
+        10.0,
+        98.0,
+        5.8,
+        8.9,
+        5.7,
+        100.0,
+        1.0
+      ]
+    },
+    "gpu:": {
+      "error": "Cannot run `powermetrics`. Try running with sudo or grant Full Disk Access."
+    },
+    "memory": {
+      "ram_total_gb": 7.75,
+      "ram_used_gb": 1.7,
+      "ram_free_gb": 5.86,
+      "ram_usage_percent": 24.5
+    },
+    "cache": {
+      "platform": "Linux",
+      "cache_info": {},
+      "error": "Unsupported platform or missing module."
+    }
+  }
+}

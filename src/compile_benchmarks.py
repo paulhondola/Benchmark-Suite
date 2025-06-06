@@ -63,6 +63,5 @@ def run_compile_benchmarks(config):
 
 if __name__ == "__main__":
 	config = load_config()
-	print("Starting Compiler Benchmarks")
+	print("Starting Compiler Benchmarks...")
 	run_compile_benchmarks(config["compile_benchmarks"])
-	print("Compiler Benchmark Finished")

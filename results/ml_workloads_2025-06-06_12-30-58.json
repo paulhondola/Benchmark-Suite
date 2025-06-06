@@ -1,0 +1,60 @@
+{
+  "Model": "sklearn",
+  "Config Metadata": {
+    "model": "random_forest",
+    "n_samples": 5000,
+    "n_features": 20,
+    "max_iter": 100
+  },
+  "Benchmark Results": {
+    "Training Time (s)": 0.8244,
+    "Inference Time (s)": 0.0084,
+    "Accuracy": 0.926
+  },
+  "Hardware Metrics:": {
+    "CPU Time (s)": 0.8350076159999995,
+    "Memory Usage (MB)": 4752.0
+  },
+  "System Info": {
+    "cpu": {
+      "platform": "Darwin",
+      "architecture": "arm64",
+      "cpu": "Apple M1 Pro",
+      "logical_cores": 10,
+      "physical_cores": 10,
+      "cpu_freq_mhz": 3228,
+      "cpu_freq_per_core_mhz": "Unavailable on this platform",
+      "cpu_usage_percent_total": 12.2,
+      "cpu_usage_per_core_percent": [
+        10.9,
+        12.9,
+        77.2,
+        20.2,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "gpu:": {
+      "error": "Cannot run `powermetrics`. Try running with sudo or grant Full Disk Access."
+    },
+    "memory": {
+      "ram_total_gb": 16.0,
+      "ram_used_gb": 4.44,
+      "ram_free_gb": 2.71,
+      "ram_usage_percent": 83.1
+    },
+    "cache": {
+      "platform": "Darwin",
+      "cache_info": {
+        "L1 Data Cache": 65536,
+        "L1 Instruction Cache": 131072,
+        "L2 Cache": 4194304,
+        "L3 Cache": null
+      }
+    }
+  }
+}

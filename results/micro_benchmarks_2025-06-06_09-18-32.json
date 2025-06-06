@@ -1,0 +1,179 @@
+{
+  "Config Metadata": {
+    "matrix_size": 10,
+    "vector_size": 1000000,
+    "max_threads": 8,
+    "memory_jumps": 10000,
+    "memory_stride": 64,
+    "thread_total_work": 1000000
+  },
+  "Benchmark Results": {
+    "Floating Point Throughput": {
+      "Benchmark Results": {
+        "Floating Point Operations (FLOPs)": 2000,
+        "FLOPS": 18691588.78504673,
+        "Execution Time (sec)": 0.000107
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 0.0,
+        "Memory Usage (MB)": 0.0
+      }
+    },
+    "Scalar FP Add Latency": {
+      "Benchmark Results": {
+        "Floating Point Operations (FLOPs)": 1000000,
+        "FLOPS": 26851404.32844638,
+        "Execution Time (sec)": 0.037242
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 0.03,
+        "Memory Usage (MB)": 0.0
+      }
+    },
+    "Memory Bandwidth": {
+      "Benchmark Results": {
+        "Memory Bandwidth (bytes/sec)": 1630988786.9520898,
+        "Memory Bandwidth (GB/sec)": 1.5189766762331964,
+        "Execution Time (sec)": 0.004905
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 0.01,
+        "Memory Usage (MB)": 7820.0
+      }
+    },
+    "Memory Latency": {
+      "Benchmark Results": {
+        "Memory Latency (nanosec)": 1.7968749999999998,
+        "Execution Time (sec)": 0.00115
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 0.0,
+        "Memory Usage (MB)": 0.0
+      }
+    },
+    "Pointer Chasing Latency": {
+      "Benchmark Results": {
+        "Pointer Chasing Latency (nanosec)": 345.75299999999993,
+        "Execution Time (sec)": 0.345753
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 0.34,
+        "Memory Usage (MB)": 0.0
+      }
+    },
+    "Cache Performance": {
+      "Benchmark Results": {
+        "Cache Effectiveness Results": [
+          {
+            "cache_size_kb": 4,
+            "execution_time_sec": 1.1e-05
+          },
+          {
+            "cache_size_kb": 64,
+            "execution_time_sec": 0.000134
+          },
+          {
+            "cache_size_kb": 512,
+            "execution_time_sec": 0.000929
+          },
+          {
+            "cache_size_kb": 2048,
+            "execution_time_sec": 0.002075
+          },
+          {
+            "cache_size_kb": 8192,
+            "execution_time_sec": 0.011998
+          }
+        ],
+        "CPU Time (s)": 0.02,
+        "Memory Usage (MB)": 0.01
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 0.02,
+        "Memory Usage (MB)": 0.01
+      }
+    },
+    "Thread Scalability": {
+      "Benchmark Results": {
+        "Thread Scalability Results": [
+          {
+            "threads": 1,
+            "execution_time_sec": 0.0783
+          },
+          {
+            "threads": 2,
+            "execution_time_sec": 0.0234
+          },
+          {
+            "threads": 3,
+            "execution_time_sec": 0.025
+          },
+          {
+            "threads": 4,
+            "execution_time_sec": 0.0156
+          },
+          {
+            "threads": 5,
+            "execution_time_sec": 0.0239
+          },
+          {
+            "threads": 6,
+            "execution_time_sec": 0.0196
+          },
+          {
+            "threads": 7,
+            "execution_time_sec": 0.0257
+          },
+          {
+            "threads": 8,
+            "execution_time_sec": 0.0362
+          }
+        ],
+        "CPU Time (s)": 0.11,
+        "Memory Usage (MB)": 0.0
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 0.11,
+        "Memory Usage (MB)": 0.0
+      }
+    }
+  },
+  "System Info": {
+    "cpu": {
+      "platform": "Linux",
+      "architecture": "aarch64",
+      "cpu": "",
+      "logical_cores": 10,
+      "physical_cores": 10,
+      "cpu_freq_mhz": null,
+      "cpu_freq_per_core_mhz": "Unavailable on this platform",
+      "cpu_usage_percent_total": 7.8,
+      "cpu_usage_per_core_percent": [
+        10.0,
+        23.8,
+        6.5,
+        2.0,
+        2.0,
+        1.0,
+        2.9,
+        2.9,
+        17.5,
+        9.2
+      ]
+    },
+    "gpu:": {
+      "error": "Cannot run `powermetrics`. Try running with sudo or grant Full Disk Access."
+    },
+    "memory": {
+      "ram_total_gb": 7.75,
+      "ram_used_gb": 0.6,
+      "ram_free_gb": 6.96,
+      "ram_usage_percent": 10.2
+    },
+    "cache": {
+      "platform": "Linux",
+      "cache_info": {},
+      "error": "Unsupported platform or missing module."
+    }
+  }
+}

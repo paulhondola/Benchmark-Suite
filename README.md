@@ -215,84 +215,123 @@ The benchmark suite has been tested and validated on the following hardware and 
 - OS: macOS Sequoia 15
 - CPU: Apple M1 Pro (10-core)
 - GPU: Integrated 16-core GPU
-- Benchmarks Tested:
-- ✅ Microbenchmarks (FP, memory, cache)
-- ✅ Machine Learning (TensorFlow-metal, PyTorch MPS, scikit-learn)
-- ✅ Sorting Benchmarks (NumPy, Pandas)
-- ✅ SQL Benchmarks (SQLite only)
-- ✅ Compilation Benchmarks (GCC, Clang)
+- Issues:
+
+    - MPS (Metal Performance Shaders) acceleration works for PyTorch and TensorFlow, but performance may vary based on workload size, especially for small to medium tasks where the CPU may outperform GPU due to higher launch latency and memory copy overhead.
 
 🖥️ Lenovo IdeaPad Gaming
 
 - OS: Windows 10 Home
 - CPU: AMD Ryzen 5 7535HS with Radeon Graphics (6-core / 12-thread)
 - GPU: Integrated AMD Radeon Graphics
-- Benchmarks Tested:
-- ✅ Microbenchmarks (FP, memory, cache)
-- ✅ Machine Learning (CPU-only PyTorch, scikit-learn, CPU-only TensorFlow)
-- ✅ Sorting Benchmarks (NumPy, Pandas)
-- ✅ SQL Benchmarks (SQLite, PostgreSQL via psycopg2)
-- ✅ Compilation Benchmarks (GCC/Clang via WSL)
+- Issues:
+
+    - TensorFlow not supported for AMD GPUs on Windows (no ROCm support)
+    - PyTorch works in CPU mode
 
 🐧 MacBook Pro (M1 Pro) — Asahi Linux
 
-- OS: Asahi Linux (Arch-based)
+- OS: Asahi Linux (Fedora-based) (kernel 6.8+, native aarch64)
 - CPU: Apple M1 Pro (10-core)
 - GPU: Currently no GPU acceleration (as of kernel 6.8+)
-- Benchmarks Tested:
-- ✅ Microbenchmarks (FP, memory, cache)
-- ✅ Machine Learning (scikit-learn, PyTorch CPU) # No TensorFlow support yet
-- ✅ Sorting Benchmarks (NumPy, Pandas)
-- ✅ SQL Benchmarks (SQLite)
-- ✅ Compilation Benchmarks (GCC)
+- Issues:
+
+    - No GPU acceleration available
+    - TensorFlow not supported (no official builds for aarch64)
 
 🪟 Windows 11 ARM64 (Virtual Machine)
 
 - OS: Windows 11 ARM64 (Hyper-V VM)
 - CPU: Apple M1 Pro (emulated)
 - GPU: None (no GPU passthrough)
-- Benchmarks Tested:
-    - ✅ Microbenchmarks (FP, memory, cache)
-    - ✅ Machine Learning:
-    - ✅ PyTorch and ✅ scikit-learn — both work on Windows ARM64
-    - ❌ TensorFlow — not supported on Windows ARM64
-    - ✅ Sorting Benchmarks (NumPy, Pandas)
-    - ✅ SQL Benchmarks (SQLite)
-    - ✅ Compilation Benchmarks (Clang)
+- Issues:
 
-📦 Docker (Planned Testing)
+    - No GPU acceleration available for PyTorch or TensorFlow
+    - TensorFlow not supported (no official PyPI wheels for ARM64)
 
-- Target: Cross-platform container-based benchmarking
-- Goals:
-    - Run SQL benchmarks inside isolated PostgreSQL containers
-    - Standardize system metrics across environments
-    - Validate portability of benchmarks in headless/server setups
-- Status: Docker setup integrated, full test suite validation in progress
+📦 Docker Container (python:3.12-slim)
 
-### 8. Limitations
+- OS: Debian-based (Python 3.12-slim) aarch64
+- CPU: Emulated ARM64 (depends on host)
+- GPU: None (no GPU passthrough)
+- Issues:
 
-While the benchmark suite runs across a wide range of platforms, the following limitations currently apply:
+    - Timezone issues with Docker on macOS (use `TZ=UTC` in docker-compose.yml)
+    - Compilation testing tricky due to Docker environment
+    - No GPU acceleration available
+    - TensorFlow not supported (no official PyPI wheels for ARM64)
 
-- macOS (M1/M2/M3 with MPS GPU acceleration):
+### 8. Docker Support
 
-    - Although supported, MPS (Metal Performance Shaders) acceleration in TensorFlow and PyTorch is often slower than CPU for small to medium workloads due to higher launch latency and memory copy overhead.
-    - TensorFlow GPU (via tensorflow-metal) may underperform compared to native CPU execution in practical scenarios.
+🐳 Running Benchmarks with Docker
 
-- Windows (AMD Ryzen with integrated graphics):
-    - On Windows ARM64, TensorFlow is not supported — no official PyPI wheels are available for this architecture. Installation will fail unless done through Conda or custom builds.
-    - No GPU acceleration available for PyTorch or TensorFlow.
-    - AMD GPUs are not supported for machine learning workloads on Windows due to lack of ROCm and DirectML integration in major ML frameworks.
-    - Only CPU-based training/inference is available.
-- Asahi Linux (aarch64 architecture):
-    - TensorFlow is not officially supported on aarch64 Linux (including Asahi).
-    - No GPU acceleration is available — machine learning benchmarks run solely on CPU.
-    - PyTorch works in CPU mode, and some libraries may need to be built from source or replaced with alternatives.
-- Docker (planned support):
-    - GPU passthrough and acceleration support inside containers is limited and hardware-dependent.
-    - Benchmarks run in Docker may vary slightly in performance due to container overhead and shared host resources.
+The benchmark suite is fully Docker-compatible and includes a Dockerfile and docker-compose.yml for easy setup and multi-environment testing.
+
+#### 📦 8.1. Prerequisites
+
+- Install Docker Desktop (macOS, Windows, Linux)
+- Ensure Docker is running (docker version should work)
+- Install docker-compose if not bundled with Docker Desktop
+
+#### ⚙️ 8.2. Build the Benchmark Suite Image
+
+From the root of the project:
+
+```bash
+docker-compose build
+```
+
+This will:
+
+- Pull the base Python image
+- Install system dependencies and your benchmark suite
+- Prepare everything inside a portable container
+
+#### 🚀 8.3. Run Individual Benchmarks
+
+Use the following commands to run specific benchmark types:
+
+```bash
+docker-compose run --rm micro       # Microbenchmarks
+docker-compose run --rm ml          # Machine Learning (TensorFlow, PyTorch, etc.)
+docker-compose run --rm sql         # SQL Benchmarks (SQLite, PostgreSQL)
+docker-compose run --rm sorting     # Sorting tests (NumPy, Pandas)
+docker-compose run --rm compile     # Compilation speed tests
+```
+
+Each service is defined in docker-compose.yml and runs its corresponding script in src/.
+
+#### 📁 8.4. View Results
+
+All benchmark results are saved in the ./results/ folder in your project root (automatically mounted into the container)
+
+#### 🔁 8.5. Rebuild After Changes
+
+If you modify your code or dependencies:
+
+```bash
+docker-compose build
+```
+
+#### 🧹 8.6 Clean Up Docker Artifacts
+
+Stop and remove all containers (if needed):
+
+```bash
+docker-compose down
+docker system prune -af
+```
 
 ### 9. Authors
 
 [Paul Hondola][paulhondola@gmail.com]
 
 [Dan Ghincul][ghinculdan@icloud.com]
+
+```
+
+```
+
+```
+
+```
