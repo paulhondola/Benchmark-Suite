@@ -327,7 +327,3 @@ docker system prune -af
 [Paul Hondola][paulhondola@gmail.com]
 
 [Dan Ghincul][ghinculdan@icloud.com]
-
-```
-
-```
