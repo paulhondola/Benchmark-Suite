@@ -39,6 +39,7 @@ def run_tensorflow_workload(config, use_gpu):
     batch_size = config["batch_size"]
     epochs = config["epochs"]
 
+
     cpu_time_before = get_cpu_time()
     memory_before = get_memory_usage()
     results = run_tensorflow_model(n_samples, n_features, batch_size, epochs, use_gpu)

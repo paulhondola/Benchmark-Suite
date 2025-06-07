@@ -1,22 +1,29 @@
 {
   "Config Metadata": {
-    "model": "random_forest",
-    "n_samples": 5000,
-    "n_features": 20,
-    "max_iter": 100
+    "row_count": 10000000,
+    "threshold": 5000000
   },
   "Benchmark Results": {
-    "results": {
-      "Training Time (s)": 0.7584,
-      "Inference Time (s)": 0.008,
-      "Accuracy": 0.911
+    "simple_select_query": {
+      "Execution Time (sec)": 0.337052,
+      "CPU Time (s)": 0.335968,
+      "Memory Usage (MB)": 0.0
     },
-    "cpu_time": 0.7699221120000002,
-    "memory_usage": 9456.0
-  },
-  "Hardware Metrics:": {
-    "CPU Time (s)": 0.7699221120000002,
-    "Memory Usage (MB)": 9456.0
+    "insert_benchmark": {
+      "Execution Time (sec)": 5.715732,
+      "CPU Time (s)": 5.701528,
+      "Memory Usage (MB)": 170912.0
+    },
+    "join_benchmark": {
+      "Execution Time (sec)": 2.861585,
+      "CPU Time (s)": 2.847677,
+      "Memory Usage (MB)": 2320.0
+    },
+    "aggregation_benchmark": {
+      "Execution Time (sec)": 2.312595,
+      "CPU Time (s)": 2.294277,
+      "Memory Usage (MB)": 2528.0
+    }
   },
   "System Info": {
     "cpu": {
@@ -27,15 +34,15 @@
       "physical_cores": 10,
       "cpu_freq_mhz": 3228,
       "cpu_freq_per_core_mhz": "Unavailable on this platform",
-      "cpu_usage_percent_total": 14.0,
+      "cpu_usage_percent_total": 11.5,
       "cpu_usage_per_core_percent": [
-        71.0,
-        66.7,
+        6.0,
+        7.0,
+        65.3,
+        33.7,
         1.0,
-        1.0,
         0.0,
-        0.0,
-        0.0,
+        2.0,
         0.0,
         0.0,
         0.0
@@ -46,9 +53,9 @@
     },
     "memory": {
       "ram_total_gb": 16.0,
-      "ram_used_gb": 6.69,
-      "ram_free_gb": 4.67,
-      "ram_usage_percent": 70.8
+      "ram_used_gb": 6.43,
+      "ram_free_gb": 6.37,
+      "ram_usage_percent": 60.2
     },
     "cache": {
       "platform": "Darwin",

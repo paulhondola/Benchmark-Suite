@@ -1,25 +1,26 @@
 {
   "Config Metadata": {
-    "numpy_array_size": 10000000,
-    "pandas_dataframe_size": 1000000
+    "compile_target": "/Users/paulhondola/GitHub/sqlite"
   },
   "Benchmark Results": {
-    "numpy_sort": {
+    "gcc": {
       "Benchmark Results": {
-        "Execution Time (sec)": 0.4353
+        "Execution Time (sec)": 9.2020407089949,
+        "CPU Usage (%)": 0.0
       },
       "Hardware Metrics": {
-        "CPU Time (s)": 0.433975,
-        "Memory Usage (MB)": 0.0
+        "CPU Time (s)": 0.0014945420000000015,
+        "Memory Usage (MB)": 80.0
       }
     },
-    "pandas_sort": {
+    "clang": {
       "Benchmark Results": {
-        "Execution Time (sec)": 0.1183
+        "Execution Time (sec)": 8.341439249998075,
+        "CPU Usage (%)": 0.0
       },
       "Hardware Metrics": {
-        "CPU Time (s)": 0.112159,
-        "Memory Usage (MB)": 0.0
+        "CPU Time (s)": 0.0014216240000000033,
+        "Memory Usage (MB)": 128.0
       }
     }
   },
@@ -32,18 +33,18 @@
       "physical_cores": 10,
       "cpu_freq_mhz": 3228,
       "cpu_freq_per_core_mhz": "Unavailable on this platform",
-      "cpu_usage_percent_total": 5.6,
+      "cpu_usage_percent_total": 40.7,
       "cpu_usage_per_core_percent": [
-        26.0,
-        26.3,
-        2.0,
-        2.0,
+        81.0,
+        80.0,
+        66.0,
+        61.6,
+        64.4,
+        34.0,
+        9.0,
+        4.0,
         0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
+        6.9
       ]
     },
     "gpu:": {
@@ -51,9 +52,9 @@
     },
     "memory": {
       "ram_total_gb": 16.0,
-      "ram_used_gb": 6.65,
-      "ram_free_gb": 4.65,
-      "ram_usage_percent": 70.9
+      "ram_used_gb": 7.37,
+      "ram_free_gb": 5.91,
+      "ram_usage_percent": 63.0
     },
     "cache": {
       "platform": "Darwin",

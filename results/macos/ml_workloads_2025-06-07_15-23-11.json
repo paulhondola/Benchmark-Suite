@@ -1,19 +1,21 @@
 {
-  "Model": "sklearn",
+  "Model": "tensorflow",
+  "GPU Enabled": true,
   "Config Metadata": {
-    "model": "random_forest",
-    "n_samples": 5000,
-    "n_features": 20,
-    "max_iter": 100
+    "n_samples": 50000,
+    "n_features": 200,
+    "batch_size": 128,
+    "epochs": 100
   },
   "Benchmark Results": {
-    "Training Time (s)": 0.8244,
-    "Inference Time (s)": 0.0084,
-    "Accuracy": 0.926
+    "Device": "/GPU:0",
+    "Training Time (s)": 492.4609,
+    "Inference Time (s)": 4.3082,
+    "Accuracy": 0.5111
   },
   "Hardware Metrics:": {
-    "CPU Time (s)": 0.8350076159999995,
-    "Memory Usage (MB)": 4752.0
+    "CPU Time (s)": 774.9820674560001,
+    "Memory Usage (MB)": 167072.0
   },
   "System Info": {
     "cpu": {
@@ -24,17 +26,17 @@
       "physical_cores": 10,
       "cpu_freq_mhz": 3228,
       "cpu_freq_per_core_mhz": "Unavailable on this platform",
-      "cpu_usage_percent_total": 12.2,
+      "cpu_usage_percent_total": 37.1,
       "cpu_usage_per_core_percent": [
-        10.9,
-        12.9,
-        77.2,
-        20.2,
-        1.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
+        100.0,
+        100.0,
+        59.6,
+        42.0,
+        18.0,
+        35.4,
+        6.0,
+        7.9,
+        2.0,
         0.0
       ]
     },
@@ -43,9 +45,9 @@
     },
     "memory": {
       "ram_total_gb": 16.0,
-      "ram_used_gb": 4.44,
-      "ram_free_gb": 2.71,
-      "ram_usage_percent": 83.1
+      "ram_used_gb": 5.89,
+      "ram_free_gb": 3.96,
+      "ram_usage_percent": 75.3
     },
     "cache": {
       "platform": "Darwin",

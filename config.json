@@ -16,7 +16,7 @@
 	},
 	"ml_workloads": {
 		"model": "tensorflow",
-		"gpu": false,
+		"gpu": true,
 		"sklearn": {
 			"model": "random_forest",
 			"n_samples": 50000,

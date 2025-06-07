@@ -24,6 +24,9 @@ def run_ml_workloads(config):
     model = config["model"]
     use_gpu = config["gpu"]
 
+    print(f"Running ML workload for model: {model} with GPU enabled: {use_gpu}")
+
+
     # Map model type to callable with correct GPU flag
     model_map = {
         "sklearn": lambda: run_sklearn_workload(config["sklearn"]) if run_sklearn_workload else _missing("scikit-learn"),
