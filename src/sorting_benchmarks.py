@@ -102,21 +102,29 @@ def sort_pandas_dataframe(rows):
     }
 
 def run_sorting_benchmarks(config):
-	numpy_size = config["numpy_array_size"]
-	pandas_size = config["pandas_dataframe_size"]
+    numpy_size = config["numpy_array_size"]
+    pandas_size = config["pandas_dataframe_size"]
 
-	results = {
-        "numpy_sort": sort_numpy_array(numpy_size),
-        "pandas_sort": sort_pandas_dataframe(pandas_size),
-	}
+    print(f"Running NumPy sorting benchmark on array of size {numpy_size}...")
+    numpy_result = sort_numpy_array(numpy_size)
 
-	data = {
-		"Config Metadata": config,
-		"Benchmark Results": results,
-		"System Info": collect_hw_info()
-	}
+    print(f"Running Pandas sorting benchmark on DataFrame with {pandas_size} rows...")
+    pandas_result = sort_pandas_dataframe(pandas_size)
 
-	save_results(data, "sorting_benchmarks")
+    results = {
+        "numpy_sort": numpy_result,
+        "pandas_sort": pandas_result,
+    }
+
+    data = {
+        "Config Metadata": config,
+        "Benchmark Results": results,
+        "System Info": collect_hw_info()
+    }
+
+    print("Saving results to file...")
+    save_results(data, "sorting_benchmarks")
+    print("Sorting benchmarks complete.")
 
 if __name__ == "__main__":
 	config = load_config()

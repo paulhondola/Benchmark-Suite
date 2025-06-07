@@ -215,6 +215,7 @@ The benchmark suite has been tested and validated on the following hardware and 
 - OS: macOS Sequoia 15
 - CPU: Apple M1 Pro (10-core)
 - GPU: Integrated 16-core GPU
+- RAM: 16GB
 - Issues:
 
     - MPS (Metal Performance Shaders) acceleration works for PyTorch and TensorFlow, but performance may vary based on workload size, especially for small to medium tasks where the CPU may outperform GPU due to higher launch latency and memory copy overhead.
@@ -224,6 +225,7 @@ The benchmark suite has been tested and validated on the following hardware and 
 - OS: Windows 10 Home
 - CPU: AMD Ryzen 5 7535HS with Radeon Graphics (6-core / 12-thread)
 - GPU: Integrated AMD Radeon Graphics
+- RAM: 16GB
 - Issues:
 
     - TensorFlow not supported for AMD GPUs on Windows (no ROCm support)
@@ -234,6 +236,7 @@ The benchmark suite has been tested and validated on the following hardware and 
 - OS: Asahi Linux (Fedora-based) (kernel 6.8+, native aarch64)
 - CPU: Apple M1 Pro (10-core)
 - GPU: Currently no GPU acceleration (as of kernel 6.8+)
+- RAM: 16GB
 - Issues:
 
     - No GPU acceleration available
@@ -244,6 +247,7 @@ The benchmark suite has been tested and validated on the following hardware and 
 - OS: Windows 11 ARM64 (Hyper-V VM)
 - CPU: Apple M1 Pro (emulated)
 - GPU: None (no GPU passthrough)
+- RAM: 10GB
 - Issues:
 
     - No GPU acceleration available for PyTorch or TensorFlow
@@ -254,6 +258,7 @@ The benchmark suite has been tested and validated on the following hardware and 
 - OS: Debian-based (Python 3.12-slim) aarch64
 - CPU: Emulated ARM64 (depends on host)
 - GPU: None (no GPU passthrough)
+- RAM: 8GB (configurable)
 - Issues:
 
     - Timezone issues with Docker on macOS (use `TZ=UTC` in docker-compose.yml)
@@ -319,7 +324,6 @@ Stop and remove all containers (if needed):
 
 ```bash
 docker-compose down
-docker system prune -af
 ```
 
 ### 9. Authors

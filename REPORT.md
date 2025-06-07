@@ -11,6 +11,7 @@ This document summarizes benchmark results collected from multiple systems using
 - **OS:** macOS Sequoia 15
 - **CPU:** Apple M1 Pro (10-core)
 - **GPU:** Integrated 16-core GPU
+- **RAM:** 16GB
 - **Status:** TensorFlow-Metal, PyTorch MPS, and scikit-learn fully functional.
 
 ### 🖥️ Lenovo IdeaPad Gaming
@@ -18,13 +19,22 @@ This document summarizes benchmark results collected from multiple systems using
 - **OS:** Windows 10 Home
 - **CPU:** AMD Ryzen 5 7535HS with Radeon Graphics (6-core / 12-thread)
 - **GPU:** Integrated AMD Radeon Graphics
+- **RAM:** 16GB
 - **Status:** CPU-only ML workloads; no GPU acceleration for TensorFlow or PyTorch.
+
+### 🪟 Windows 11 ARM64 (Virtual Machine)
+- **OS:** Windows 11 ARM64 (Hyper-V VM)
+- **CPU:** Apple M1 Pro (emulated)
+- **GPU:** None (no GPU passthrough)
+- **RAM:** 10GB
+- **Status:** No GPU acceleration; TensorFlow not supported on ARM64 Windows.
 
 ### 🐧 MacBook Pro (M1 Pro) — Asahi Linux
 
 - **OS:** Asahi Linux (Fedora-based)
 - **CPU:** Apple M1 Pro (10-core)
 - **GPU:** Currently no GPU acceleration (as of kernel 6.8+)
+- **RAM:** 16GB
 - **Status:** CPU-only mode for all ML workloads; TensorFlow not supported on aarch64 Linux.
 
 ### 🐳 Docker Container (Apple M1 Pro)
@@ -32,6 +42,7 @@ This document summarizes benchmark results collected from multiple systems using
 - **OS:** Debian (Docker)
 - **CPU:** Apple M1 Pro (10-core)
 - **GPU:** No GPU Passthrough
+- **RAM:** 8GB (limited by Docker constraints)
 - **Status:** Limited to 8GB RAM; runs microbenchmarks and ML workloads in a containerized environment.
 
 ---
