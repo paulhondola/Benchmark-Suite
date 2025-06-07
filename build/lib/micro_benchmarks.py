@@ -332,26 +332,48 @@ def run_microbenchmarks(config):
     max_threads = config["max_threads"]
     thread_total_work = config["thread_total_work"]
 
+    print("Running Floating Point Throughput Benchmark...")
+    fp_result = measure_fp_throughput(matrix_size)
+
+    print("Running Scalar FP Add Latency Benchmark...")
+    scalar_fp_result = measure_scalar_fp_add(vector_size)
+
+    print("Running Memory Bandwidth Benchmark...")
+    mem_bw_result = measure_memory_bandwidth(vector_size)
+
+    print("Running Memory Latency Benchmark...")
+    mem_latency_result = measure_memory_latency(memory_jumps, stride)
+
+    print("Running Pointer Chasing Latency Benchmark...")
+    pointer_latency_result = measure_pointer_chasing_latency(vector_size)
+
+    print("Running Cache Effectiveness Benchmark...")
+    cache_result = measure_cache_effectiveness()
+
+    print("Running Thread Scalability Benchmark...")
+    thread_result = measure_thread_scaling(max_threads, thread_total_work)
+
     results = {
-		"Floating Point Throughput": measure_fp_throughput(matrix_size),
-        "Scalar FP Add Latency": measure_scalar_fp_add(vector_size),
-        "Memory Bandwidth": measure_memory_bandwidth(vector_size),
-        "Memory Latency": measure_memory_latency(memory_jumps, stride),
-        "Pointer Chasing Latency": measure_pointer_chasing_latency(vector_size),
-        "Cache Performance": measure_cache_effectiveness(),
-        "Thread Scalability": measure_thread_scaling(max_threads, thread_total_work)
+        "Floating Point Throughput": fp_result,
+        "Scalar FP Add Latency": scalar_fp_result,
+        "Memory Bandwidth": mem_bw_result,
+        "Memory Latency": mem_latency_result,
+        "Pointer Chasing Latency": pointer_latency_result,
+        "Cache Performance": cache_result,
+        "Thread Scalability": thread_result
     }
 
     data = {
-		"Config Metadata": config,
-		"Benchmark Results": results,
-		"System Info": collect_hw_info()
-	}
+        "Config Metadata": config,
+        "Benchmark Results": results,
+        "System Info": collect_hw_info()
+    }
 
+    print("Saving results to file...")
     save_results(data, "micro_benchmarks")
+    print("Microbenchmarks complete.")
 
 if __name__ == "__main__":
 	config = load_config()
-	print("Starting Micro Benchmarks")
+	print("Starting Micro Benchmarks...")
 	run_microbenchmarks(config["microbenchmarks"])
-	print("Micro Benchmarks Finished")

@@ -24,14 +24,15 @@ def measure_fp_throughput(size):
 
     # Calculate total floating point operations (FLOPs)
     flops = 2 * size ** 3  # Number of floating point operations (for matrix multiplication)
+    gflops = flops / (10 ** 9)
 
     # Execution time in seconds
     exec_time = round(end - start, 6)
 
     return {
         "Benchmark Results": {
-            "Floating Point Operations (FLOPs)": flops,
-            "FLOPS": flops / exec_time,
+            "Giga Floating Point Operations (GFLOPs)": gflops,
+            "GFLOPS": gflops / exec_time,
             "Execution Time (sec)": exec_time,
         },
         "Hardware Metrics": {

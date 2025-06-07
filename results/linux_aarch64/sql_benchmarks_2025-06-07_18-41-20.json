@@ -1,0 +1,70 @@
+{
+  "Config Metadata": {
+    "row_count": 10000000,
+    "threshold": 5000000
+  },
+  "Benchmark Results": {
+    "simple_select_query": {
+      "Execution Time (sec)": 0.255312,
+      "CPU Time (s)": 0.25,
+      "Memory Usage (MB)": 0.0
+    },
+    "insert_benchmark": {
+      "Execution Time (sec)": 4.821971,
+      "CPU Time (s)": 4.81,
+      "Memory Usage (MB)": 89056.0
+    },
+    "join_benchmark": {
+      "Execution Time (sec)": 2.364054,
+      "CPU Time (s)": 2.35,
+      "Memory Usage (MB)": 0.0
+    },
+    "aggregation_benchmark": {
+      "Execution Time (sec)": 2.080831,
+      "CPU Time (s)": 2.08,
+      "Memory Usage (MB)": 0.0
+    }
+  },
+  "System Info": {
+    "cpu": {
+      "platform": "Linux",
+      "architecture": "aarch64",
+      "cpu": "",
+      "logical_cores": 10,
+      "physical_cores": 10,
+      "cpu_freq_mhz": 1412.0,
+      "cpu_freq_per_core_mhz": [
+        600.0,
+        600.0,
+        3036.0
+      ],
+      "cpu_usage_percent_total": 0.1,
+      "cpu_usage_per_core_percent": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "gpu:": {
+      "error": "Cannot run `powermetrics`. Try running with sudo or grant Full Disk Access."
+    },
+    "memory": {
+      "ram_total_gb": 15.0,
+      "ram_used_gb": 3.82,
+      "ram_free_gb": 8.62,
+      "ram_usage_percent": 42.6
+    },
+    "cache": {
+      "platform": "Linux",
+      "cache_info": {},
+      "error": "Unsupported platform or missing module."
+    }
+  }
+}

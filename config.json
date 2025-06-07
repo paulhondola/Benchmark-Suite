@@ -1,43 +1,43 @@
 {
-	"microbenchmarks": {
-		"matrix_size": 1000,
-		"vector_size": 10000000,
-		"max_threads": 16,
-		"memory_jumps": 10000,
-		"memory_stride": 64,
-		"thread_total_work": 10000
-	},
-	"sorting_benchmarks": {
-		"numpy_array_size": 100000000,
-		"pandas_dataframe_size": 10000000
-	},
-	"compile_benchmarks": {
-		"compile_target": "/Users/paulhondola/GitHub/sqlite"
-	},
-	"ml_workloads": {
-		"model": "pytorch",
-		"gpu": true,
-		"sklearn": {
-			"model": "random_forest",
-			"n_samples": 50000,
-			"n_features": 200,
-			"max_iter": 100
-		},
-		"pytorch": {
-			"n_samples": 50000,
-			"n_features": 200,
-			"batch_size": 128,
-			"epochs": 100
-		},
-		"tensorflow": {
-			"n_samples": 50000,
-			"n_features": 200,
-			"batch_size": 128,
-			"epochs": 100
-		}
-	},
-	"sql_benchmarks": {
-		"row_count": 10000000,
-		"threshold": 5000000
-	}
+  "microbenchmarks": {
+    "matrix_size": 1000,
+    "vector_size": 10000000,
+    "max_threads": 16,
+    "memory_jumps": 10000,
+    "memory_stride": 64,
+    "thread_total_work": 10000
+  },
+  "sorting_benchmarks": {
+    "numpy_array_size": 100000000,
+    "pandas_dataframe_size": 10000000
+  },
+  "compile_benchmarks": {
+    "compile_target": ""
+  },
+  "ml_workloads": {
+    "model": "pytorch",
+    "gpu": true,
+    "sklearn": {
+      "model": "random_forest",
+      "n_samples": 50000,
+      "n_features": 200,
+      "max_iter": 100
+    },
+    "pytorch": {
+      "n_samples": 50000,
+      "n_features": 200,
+      "batch_size": 128,
+      "epochs": 100
+    },
+    "tensorflow": {
+      "n_samples": 50000,
+      "n_features": 200,
+      "batch_size": 128,
+      "epochs": 100
+    }
+  },
+  "sql_benchmarks": {
+    "row_count": 10000000,
+    "threshold": 5000000
+  }
 }

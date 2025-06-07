@@ -1,0 +1,62 @@
+{
+  "Model": "pytorch",
+  "GPU Enabled": true,
+  "Config Metadata": {
+    "n_samples": 50000,
+    "n_features": 200,
+    "batch_size": 128,
+    "epochs": 100
+  },
+  "Benchmark Results": {
+    "Device": "cpu",
+    "Training Time (s)": 10.3095,
+    "Inference Time (s)": 0.0021,
+    "Accuracy": 0.4984
+  },
+  "Hardware Metrics:": {
+    "CPU Time (s)": 101.15,
+    "Memory Usage (MB)": 88368.0
+  },
+  "System Info": {
+    "cpu": {
+      "platform": "Linux",
+      "architecture": "aarch64",
+      "cpu": "",
+      "logical_cores": 10,
+      "physical_cores": 10,
+      "cpu_freq_mhz": 2224.0,
+      "cpu_freq_per_core_mhz": [
+        600.0,
+        3036.0,
+        600.0
+      ],
+      "cpu_usage_percent_total": 0.3,
+      "cpu_usage_per_core_percent": [
+        2.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "gpu:": {
+      "error": "Cannot run `powermetrics`. Try running with sudo or grant Full Disk Access."
+    },
+    "memory": {
+      "ram_total_gb": 15.0,
+      "ram_used_gb": 3.77,
+      "ram_free_gb": 8.66,
+      "ram_usage_percent": 42.3
+    },
+    "cache": {
+      "platform": "Linux",
+      "cache_info": {},
+      "error": "Unsupported platform or missing module."
+    }
+  }
+}

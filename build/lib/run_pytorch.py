@@ -16,6 +16,13 @@ def get_pytorch_device(use_gpu):
 def run_pytorch_model(n_samples, n_features, batch_size, epochs, use_gpu=False):
     device = get_pytorch_device(use_gpu)
 
+    if device.type == 'mps':
+        print("Using Apple Silicon GPU (MPS) for PyTorch.")
+    elif device.type == 'cuda':
+        print("Using NVIDIA GPU for PyTorch.")
+    else:
+        print("Using CPU for PyTorch.")
+
     X = torch.randn(n_samples, n_features).to(device)
     y = torch.randint(0, 2, (n_samples,)).to(device)
     split = int(0.8 * n_samples)

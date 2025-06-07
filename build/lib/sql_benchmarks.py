@@ -167,12 +167,23 @@ def run_sql_benchmarks(config):
     row_count = config["row_count"]
     threshold = config["threshold"]
 
-    # Running different types of SQL benchmarks
+    print(f"Running Simple SELECT Query Benchmark with {row_count} rows...")
+    select_result = simple_select_query(row_count, threshold)
+
+    print(f"Running INSERT Benchmark with {row_count} rows...")
+    insert_result = insert_benchmark(row_count)
+
+    print(f"Running JOIN Benchmark with {row_count} rows in each table...")
+    join_result = join_benchmark(row_count)
+
+    print(f"Running AGGREGATION Benchmark (GROUP BY id % 1000)...")
+    aggregation_result = aggregation_benchmark(row_count)
+
     results = {
-        "simple_select_query": simple_select_query(row_count, threshold),
-        "insert_benchmark": insert_benchmark(row_count),
-        "join_benchmark": join_benchmark(row_count),
-        "aggregation_benchmark": aggregation_benchmark(row_count)
+        "simple_select_query": select_result,
+        "insert_benchmark": insert_result,
+        "join_benchmark": join_result,
+        "aggregation_benchmark": aggregation_result
     }
 
     data = {
@@ -181,10 +192,11 @@ def run_sql_benchmarks(config):
         "System Info": collect_hw_info()
     }
 
+    print("Saving results to file...")
     save_results(data, "sql_benchmarks")
+    print("SQL Benchmarks complete.")
 
 if __name__ == "__main__":
     config = load_config()
-    print("Starting SQL Benchmarks")
+    print("Starting SQL Benchmarks...")
     run_sql_benchmarks(config["sql_benchmarks"])
-    print("SQL Benchmarks Finished")
