@@ -1,0 +1,68 @@
+{
+  "Config Metadata": {
+    "numpy_array_size": 100000000,
+    "pandas_dataframe_size": 10000000
+  },
+  "Benchmark Results": {
+    "numpy_sort": {
+      "Benchmark Results": {
+        "Execution Time (sec)": 4.8862
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 4.882607,
+        "Memory Usage (MB)": 0.0
+      }
+    },
+    "pandas_sort": {
+      "Benchmark Results": {
+        "Execution Time (sec)": 1.6856
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 1.681233,
+        "Memory Usage (MB)": 0.0
+      }
+    }
+  },
+  "System Info": {
+    "cpu": {
+      "platform": "Darwin",
+      "architecture": "arm64",
+      "cpu": "Apple M1 Pro",
+      "logical_cores": 10,
+      "physical_cores": 10,
+      "cpu_freq_mhz": 3228,
+      "cpu_freq_per_core_mhz": "Unavailable on this platform",
+      "cpu_usage_percent_total": 18.8,
+      "cpu_usage_per_core_percent": [
+        27.3,
+        27.3,
+        39.0,
+        22.0,
+        24.8,
+        12.0,
+        35.0,
+        1.0,
+        0.0,
+        0.0
+      ]
+    },
+    "gpu:": {
+      "error": "Cannot run `powermetrics`. Try running with sudo or grant Full Disk Access."
+    },
+    "memory": {
+      "ram_total_gb": 16.0,
+      "ram_used_gb": 6.73,
+      "ram_free_gb": 7.3,
+      "ram_usage_percent": 54.4
+    },
+    "cache": {
+      "platform": "Darwin",
+      "cache_info": {
+        "L1 Data Cache": 65536,
+        "L1 Instruction Cache": 131072,
+        "L2 Cache": 4194304,
+        "L3 Cache": null
+      }
+    }
+  }
+}

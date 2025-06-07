@@ -22,41 +22,37 @@ def _missing(name):
 
 def run_ml_workloads(config):
     model = config["model"]
+    use_gpu = config["gpu"]
 
-    if not model:
-        raise ValueError("Model type to run must be specified in the config, the ml_workloads section!\n"
-                         "Available models: sklearn, pytorch_cpu, pytorch_gpu, tensorflow_cpu, tensorflow_gpu.")
-
+    # Map model type to callable with correct GPU flag
     model_map = {
         "sklearn": lambda: run_sklearn_workload(config["sklearn"]) if run_sklearn_workload else _missing("scikit-learn"),
-        "pytorch_cpu": lambda: run_pytorch_workload(config["pytorch"], use_gpu=False) if run_pytorch_workload else _missing("PyTorch"),
-        "pytorch_gpu": lambda: run_pytorch_workload(config["pytorch"], use_gpu=True) if run_pytorch_workload else _missing("PyTorch"),
-        "tensorflow_cpu": lambda: run_tensorflow_workload(config["tensorflow"], use_gpu=False) if run_tensorflow_workload else _missing("TensorFlow"),
-        "tensorflow_gpu": lambda: run_tensorflow_workload(config["tensorflow"], use_gpu=True) if run_tensorflow_workload else _missing("TensorFlow"),
+        "pytorch": lambda: run_pytorch_workload(config["pytorch"], use_gpu=use_gpu) if run_pytorch_workload else _missing("PyTorch"),
+        "tensorflow": lambda: run_tensorflow_workload(config["tensorflow"], use_gpu=use_gpu) if run_tensorflow_workload else _missing("TensorFlow"),
     }
 
-    # Check if the model is available in the map
     if model not in model_map:
-        raise ValueError(f"Unknown model {model} in config")
+        raise ValueError(f"Unknown model '{model}' in config. Expected one of: {list(model_map.keys())}")
 
-    # Run the corresponding model workload
-    print(f"Running {model} workload...")
+    print(f"Running {model} workload (GPU: {use_gpu})...")
     result = model_map[model]()
 
+    # Extract result metrics
     cpu_time = result["cpu_time"]
     memory_usage = result["memory_usage"]
     model_results = result["results"]
 
-    # Save results
     data = {
         "Model": model,
+        "GPU Enabled": use_gpu,
         "Config Metadata": config[model],
         "Benchmark Results": model_results,
-        "Hardware Metrics:":{
+        "Hardware Metrics:": {
             "CPU Time (s)": cpu_time,
             "Memory Usage (MB)": memory_usage,
         },
-        "System Info": collect_hw_info()}
+        "System Info": collect_hw_info()
+    }
 
     save_results(data, "ml_workloads")
 
