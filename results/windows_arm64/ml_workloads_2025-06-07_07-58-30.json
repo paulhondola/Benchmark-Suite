@@ -1,0 +1,58 @@
+{
+  "Model": "pytorch",
+  "GPU Enabled": true,
+  "Config Metadata": {
+    "n_samples": 50000,
+    "n_features": 200,
+    "batch_size": 128,
+    "epochs": 100
+  },
+  "Benchmark Results": {
+    "Device": "cpu",
+    "Training Time (s)": 167.0335,
+    "Inference Time (s)": 0.0327,
+    "Accuracy": 0.4946
+  },
+  "Hardware Metrics:": {
+    "CPU Time (s)": 915.96875,
+    "Memory Usage (MB)": 128700.0
+  },
+  "System Info": {
+    "cpu": {
+      "platform": "Windows",
+      "architecture": "ARM64",
+      "cpu": "ARMv8 (64-bit) Family 8 Model 0 Revision   0, Apple",
+      "logical_cores": 6,
+      "physical_cores": 6,
+      "cpu_freq_mhz": 2000.0,
+      "cpu_freq_per_core_mhz": "Unavailable on this platform",
+      "cpu_usage_percent_total": 12.7,
+      "cpu_usage_per_core_percent": [
+        23.9,
+        9.5,
+        12.7,
+        4.8,
+        12.7,
+        12.7
+      ]
+    },
+    "gpu:": {
+      "error": "Cannot run `powermetrics`. Try running with sudo or grant Full Disk Access."
+    },
+    "memory": {
+      "ram_total_gb": 9.99,
+      "ram_used_gb": 3.95,
+      "ram_free_gb": 6.04,
+      "ram_usage_percent": 39.5
+    },
+    "cache": {
+      "platform": "Windows",
+      "cache_info": {
+        "L2 Cache": 0,
+        "L3 Cache": 0
+      },
+      "cpu_brand": "Apple silicon",
+      "arch": "ARM_8"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "Config Metadata": {
+    "row_count": 10000000,
+    "threshold": 5000000
+  },
+  "Benchmark Results": {
+    "simple_select_query": {
+      "Execution Time (sec)": 1.348171,
+      "CPU Time (s)": 1.296875,
+      "Memory Usage (MB)": -8.0
+    },
+    "insert_benchmark": {
+      "Execution Time (sec)": 33.783003,
+      "CPU Time (s)": 32.21875,
+      "Memory Usage (MB)": 756.0
+    },
+    "join_benchmark": {
+      "Execution Time (sec)": 11.621517,
+      "CPU Time (s)": 10.640625,
+      "Memory Usage (MB)": 3520.0
+    },
+    "aggregation_benchmark": {
+      "Execution Time (sec)": 9.452698,
+      "CPU Time (s)": 9.3125,
+      "Memory Usage (MB)": 2224.0
+    }
+  },
+  "System Info": {
+    "cpu": {
+      "platform": "Windows",
+      "architecture": "ARM64",
+      "cpu": "ARMv8 (64-bit) Family 8 Model 0 Revision   0, Apple",
+      "logical_cores": 6,
+      "physical_cores": 6,
+      "cpu_freq_mhz": 2000.0,
+      "cpu_freq_per_core_mhz": "Unavailable on this platform",
+      "cpu_usage_percent_total": 6.0,
+      "cpu_usage_per_core_percent": [
+        15.4,
+        15.6,
+        4.7,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "gpu:": {
+      "error": "Cannot run `powermetrics`. Try running with sudo or grant Full Disk Access."
+    },
+    "memory": {
+      "ram_total_gb": 9.99,
+      "ram_used_gb": 5.91,
+      "ram_free_gb": 4.08,
+      "ram_usage_percent": 59.1
+    },
+    "cache": {
+      "platform": "Windows",
+      "cache_info": {
+        "L2 Cache": 0,
+        "L3 Cache": 0
+      },
+      "cpu_brand": "Apple silicon",
+      "arch": "ARM_8"
+    }
+  }
+}

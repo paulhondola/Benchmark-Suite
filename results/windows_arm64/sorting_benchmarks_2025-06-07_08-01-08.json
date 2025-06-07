@@ -1,0 +1,64 @@
+{
+  "Config Metadata": {
+    "numpy_array_size": 100000000,
+    "pandas_dataframe_size": 10000000
+  },
+  "Benchmark Results": {
+    "numpy_sort": {
+      "Benchmark Results": {
+        "Execution Time (sec)": 10.9028
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 10.75,
+        "Memory Usage (MB)": 0.0
+      }
+    },
+    "pandas_sort": {
+      "Benchmark Results": {
+        "Execution Time (sec)": 4.3526
+      },
+      "Hardware Metrics": {
+        "CPU Time (s)": 4.328125,
+        "Memory Usage (MB)": 0.0
+      }
+    }
+  },
+  "System Info": {
+    "cpu": {
+      "platform": "Windows",
+      "architecture": "ARM64",
+      "cpu": "ARMv8 (64-bit) Family 8 Model 0 Revision   0, Apple",
+      "logical_cores": 6,
+      "physical_cores": 6,
+      "cpu_freq_mhz": 2000.0,
+      "cpu_freq_per_core_mhz": "Unavailable on this platform",
+      "cpu_usage_percent_total": 2.1,
+      "cpu_usage_per_core_percent": [
+        6.1,
+        6.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "gpu:": {
+      "error": "Cannot run `powermetrics`. Try running with sudo or grant Full Disk Access."
+    },
+    "memory": {
+      "ram_total_gb": 9.99,
+      "ram_used_gb": 4.36,
+      "ram_free_gb": 5.63,
+      "ram_usage_percent": 43.6
+    },
+    "cache": {
+      "platform": "Windows",
+      "cache_info": {
+        "L2 Cache": 0,
+        "L3 Cache": 0
+      },
+      "cpu_brand": "Apple silicon",
+      "arch": "ARM_8"
+    }
+  }
+}
