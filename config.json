@@ -15,7 +15,7 @@
 		"compile_target": "/Users/paulhondola/GitHub/sqlite"
 	},
 	"ml_workloads": {
-		"model": "tensorflow",
+		"model": "pytorch",
 		"gpu": true,
 		"sklearn": {
 			"model": "random_forest",
